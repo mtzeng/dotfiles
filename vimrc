@@ -453,18 +453,18 @@ if has("unix") && !has("mac")
   execute "set <M-,>=\e,"
   execute "set <M-.>=\e."
 elseif has("mac")
-  execute "set <M-1>=\e1"
-  execute "set <M-2>=\e2"
-  execute "set <M-3>=\e3"
-  execute "set <M-4>=\e4"
-  execute "set <M-5>=\e5"
-  execute "set <M-6>=\e6"
-  execute "set <M-7>=\e7"
-  execute "set <M-8>=\e8"
-  execute "set <M-9>=\e9"
-  execute "set <M-0>=\e0"
-  execute "set <M-,>=\e,"
-  execute "set <M-.>=\e."
+  execute "set <M-1>=¡"
+  execute "set <M-2>=™"
+  execute "set <M-3>=£"
+  execute "set <M-4>=¢"
+  execute "set <M-5>=∞"
+  execute "set <M-6>=§"
+  execute "set <M-7>=¶"
+  execute "set <M-8>=•"
+  execute "set <M-9>=ª"
+  execute "set <M-0>=º"
+  execute "set <M-,>=≤"
+  execute "set <M-.>=≥"
 elseif has("win32")
   execute "set <M-1>=±"
   execute "set <M-2>=²"
@@ -491,7 +491,7 @@ noremap <M-8> 8gt
 noremap <M-9> 9gt
 noremap <M-0> 10gt
 noremap <M-,> :execute "silent! tabmove " . (tabpagenr()-2)<cr>
-noremap <M-.> :execute "silent! tabmove " . (tabpagenr())<cr>
+noremap <M-.> :execute "silent! tabmove " . (tabpagenr()+1)<cr>
 
 noremap th :tabprevious<cr>
 noremap tl :tabnext<cr>
