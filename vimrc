@@ -100,9 +100,8 @@ set lazyredraw
 set ttyfast
 
 " disable sounds
-set noerrorbells
-set novisualbell
-set t_vb=
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 set nobackup cursorline cursorcolumn ruler showcmd nowrap hlsearch incsearch
 set nu cindent ts=4 sw=4
@@ -134,7 +133,6 @@ map <leader>tn :if &nu == '' <bar> set nu <bar> echo 'line number on' <bar> else
 map <leader>ti :if &ic == '' <bar> set ic <bar> echo 'ignore case' <bar> else <bar> set noic <bar> echo 'case sensitive' <bar> endif<cr>
 
 nnoremap <silent> <f4>   :close<cr>
-nnoremap <silent> <c-f4>   :tabclose<cr>
 nnoremap <silent> <f5>   :NERDTreeToggle %:p:h<cr>
 "nnoremap <silent> <f6>   :let &hlsearch = !&hlsearch<cr>
 nnoremap <silent> <f7>   :lprevious<cr>
