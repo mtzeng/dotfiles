@@ -413,9 +413,11 @@ function! s:set_project() " {{{
 
   " search a readable database
   let db_found = 0
-  while (path != '' && path != '/')
+  while (isdirectory(path))
     if filereadable(path . g:cs_db)
       let db_found = 1
+      break
+    elseif (path == '/')
       break
     endif
     let path = fnamemodify(path, ":h")
