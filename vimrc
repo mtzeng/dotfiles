@@ -160,6 +160,7 @@ nnoremap <leader>va :execute "GrepAdd \\<" . expand("<cword>") . "\\> " . expand
 
 let g:netrw_browse_split = 3
 let g:tagbar_sort = 0
+hi TagbarHighlight guifg=black guibg=red ctermfg=black ctermbg=red
 let VCSCommandDisableMappings = 1
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowBookmarks = 1
