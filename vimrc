@@ -114,11 +114,11 @@ set listchars=tab:»·,trail:·
 "set list
 "hi SpecialKey ctermbg=red guibg=red
 
-au  BufNewFile,BufRead *.aidl   setf java		" android interface definition language
-au  FileType java set et nu
-au  FileType c,cpp,asm,make set nu
-au  BufEnter \c*.c,\c*.cc,\c*.cpp,\c*.h,\c*.java,\c*.aidl,\c*.s call s:set_project() " '\c' to igonre case
-au  BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufNewFile,BufRead *.aidl   setf java		" android interface definition language
+autocmd FileType java set et nu
+autocmd FileType c,cpp,asm,make set nu
+autocmd BufEnter \c*.c,\c*.cc,\c*.cpp,\c*.h,\c*.java,\c*.aidl,\c*.s call s:set_project() " '\c' to igonre case
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " set leader to ,
 let mapleader=","
@@ -162,6 +162,9 @@ let g:netrw_browse_split = 3
 let g:tagbar_sort = 0
 hi TagbarHighlight guifg=black guibg=red ctermfg=black ctermbg=red
 let VCSCommandDisableMappings = 1
+augroup VCSCommand
+autocmd User VCSVimDiffFinish wincmd p
+augroup VCSCommand
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowBookmarks = 1
 let g:DirDiffExcludes = ".svn,.git,.*.swp,*.o,*.o.cmd,tags,cscope.*,*.rej,*.orig"
