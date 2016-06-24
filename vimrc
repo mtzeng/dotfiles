@@ -109,6 +109,8 @@ set completeopt=menu
 set updatetime=1200
 set diffopt+=vertical
 set laststatus=2
+" eliminating delays on ESC in vim and zsh
+set timeout timeoutlen=1000 ttimeoutlen=0
 
 set listchars=tab:»·,trail:·
 "set list
