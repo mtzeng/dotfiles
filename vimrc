@@ -111,6 +111,7 @@ set diffopt+=vertical
 set laststatus=2
 " eliminating delays on ESC in vim and zsh
 set timeout timeoutlen=1000 ttimeoutlen=0
+set backspace=indent,eol,start
 
 set listchars=tab:»·,trail:·
 "set list
