@@ -29,7 +29,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
-NeoBundle 'kien/ctrlp.vim'
+"NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'easymotion/vim-easymotion'
 
 NeoBundle 'mhinz/vim-signify'
@@ -62,6 +62,7 @@ NeoBundle 'matchit.zip'
 NeoBundle 'vcscommand.vim'
 NeoBundle 'ZoomWin'
 NeoBundle 'LargeFile'
+NeoBundle 'hewes/unite-gtags'
 " }}}
 
 call neobundle#end()
@@ -197,9 +198,10 @@ if neobundle#tap('unite.vim')
   xmap <Leader>f [unite]
   imap <Leader>f <C-\><C-N>[unite]
 
-  nnoremap <silent> [unite]f :<C-U>Unite
-        \ -input=<C-R>=fnamemodify(unite#helper#get_buffer_directory(bufnr('%')), ':p:.')<CR>
-        \ -buffer-name=files file file/new<CR>
+  "nnoremap <silent> [unite]f :<C-U>Unite
+  "      \ -input=<C-R>=fnamemodify(unite#helper#get_buffer_directory(bufnr('%')), ':p:.')<CR>
+  "      \ -buffer-name=files file file/new<CR>
+  nnoremap <silent> [unite]f :<C-U>Unite gtags/path<CR>
   nnoremap <silent> [unite]F :<C-U>Unite
         \ -input=<C-R>=fnamemodify(unite#helper#get_buffer_directory(bufnr('%')), ':p:.')<CR>
         \ -buffer-name=files file file/new file_rec<CR>
@@ -226,6 +228,9 @@ if neobundle#tap('unite.vim')
 
   " Configuration variables {{{
   "let g:unite_data_directory = expand(s:rtp . '/.unite/')
+  let g:unite_source_rec_find_args = ['-type', 'd', '-name', '.svn', '-prune', '-o', '-name', 'builds', '-prune', '-o', '-print']
+  let g:unite_source_rec_unit = 10000
+
   let g:unite_quick_match_table = {
         \   'a': 0,  'b': 1,  'c': 2,  'd': 3,  'e': 4,  'f': 5,  'g': 6,  'h': 7,  'i': 8,  'j': 9,
         \   'k': 10, 'l': 11, 'm': 12, 'n': 13, 'o': 14, 'p': 15, 'q': 16, 'r': 17, 's': 18, 't': 19,
@@ -400,7 +405,7 @@ nnoremap <C-[>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-[>i :lcs find i <C-R>=expand("<cfile>")<CR><CR>
 
 let current_project = ''
-let use_cscope = 1
+let use_cscope = 0 " 1: cscope; 0: gtags
 if (g:use_cscope == 1)
   let cs_prg = "cscope"
   let cs_db = "/cscope.out"
@@ -440,7 +445,7 @@ function! s:set_project() " {{{
     execute "set cscopetagorder=0"
     execute "set cscopetag"
     execute "set cscopequickfix=s-,c-,d-,i-,t-,e-"
-    execute "cs add " . g:current_project . g:cs_db . " " . g:current_project
+    execute "cs add " . g:current_project . g:cs_db
   endif
 endfunction " }}}
 " }}}
