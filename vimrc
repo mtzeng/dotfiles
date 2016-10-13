@@ -58,11 +58,9 @@ NeoBundle 'vimwiki/vimwiki'
 NeoBundle 'a.vim'
 NeoBundle 'DirDiff.vim'
 NeoBundle 'grep.vim'
-NeoBundle 'matchit.zip'
 NeoBundle 'vcscommand.vim'
 NeoBundle 'ZoomWin'
 NeoBundle 'LargeFile'
-NeoBundle 'hewes/unite-gtags'
 " }}}
 
 call neobundle#end()
@@ -201,7 +199,7 @@ if neobundle#tap('unite.vim')
   "nnoremap <silent> [unite]f :<C-U>Unite
   "      \ -input=<C-R>=fnamemodify(unite#helper#get_buffer_directory(bufnr('%')), ':p:.')<CR>
   "      \ -buffer-name=files file file/new<CR>
-  nnoremap <silent> [unite]f :<C-U>Unite gtags/path<CR>
+  nnoremap <silent> [unite]f :<C-U>Unite file_list:<C-R>=current_project . "/cscope.files"<CR><CR>
   nnoremap <silent> [unite]F :<C-U>Unite
         \ -input=<C-R>=fnamemodify(unite#helper#get_buffer_directory(bufnr('%')), ':p:.')<CR>
         \ -buffer-name=files file file/new file_rec<CR>
@@ -406,7 +404,7 @@ nnoremap <C-[>i :lcs find i <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-[>a :lcs find a <C-R>=expand("<cword>")<CR><CR>
 
 let current_project = ''
-let use_cscope = 0 " 1: cscope; 0: gtags
+let use_cscope = 1 " 1: cscope; 0: gtags
 if (g:use_cscope == 1)
   let cs_prg = "cscope"
   let cs_db = "cscope.out"
