@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# project directory
+# get project directory
 prj_dir="$1"
 if [ -z $prj_dir ]; then
 	prj_dir=`pwd`
@@ -9,85 +9,20 @@ fi
 # replace with absolute path
 prj_dir=`readlink -f $prj_dir`
 
-## source files to exclude
-#exclude_lst=
-#exclude_lst=$exclude_lst:out/
-#
-## kernel
-#exclude_lst=$exclude_lst:kernel/arch/[b-z]
-#exclude_lst=$exclude_lst:kernel/arch/a[a-qs-z]
-#exclude_lst=$exclude_lst:kernel/arch/arm/[a-ln-z]
-#exclude_lst=$exclude_lst:kernel/arch/arm/mach-[a-ln-z]
-#exclude_lst=$exclude_lst:kernel/drivers/platform/x86/
-#exclude_lst=$exclude_lst:kernel/drivers/staging
-#
-#exclude_lst=$exclude_lst:src/router/busybox-1.x/
-#exclude_lst=$exclude_lst:src/router/ffmpeg/
-#exclude_lst=$exclude_lst:src/router/speedtest-cli/
-#exclude_lst=$exclude_lst:src/router/utelnetd/
-#exclude_lst=$exclude_lst:src/router/www/
-#exclude_lst=$exclude_lst:dhd/src/wl/
-##exclude_lst=$exclude_lst:main/src/wl/
-#exclude_lst=$exclude_lst:src/dongle/rte/wl/builds/
-#exclude_lst=$exclude_lst:build/dongle/
-#exclude_lst=$exclude_lst:components/chips/
-#exclude_lst=$exclude_lst:mDNSResponder/
-#exclude_lst=$exclude_lst:src/tools/install/app/installshield
-#
-#exclude_lst=$exclude_lst:bsd_osl.[ch]
-#exclude_lst=$exclude_lst:cfe_osl.[ch]
-#exclude_lst=$exclude_lst:ecos_osl.[ch]
-#exclude_lst=$exclude_lst:efi_osl.[ch]
-#exclude_lst=$exclude_lst:fbsd_osl.[ch]
-#exclude_lst=$exclude_lst:generic_osl.[ch]
-#exclude_lst=$exclude_lst:iopos_osl.[ch]
-#exclude_lst=$exclude_lst:macosx_osl.[ch]
-#exclude_lst=$exclude_lst:min_osl.[ch]
-#exclude_lst=$exclude_lst:ndis_osl.[ch]
-#exclude_lst=$exclude_lst:vx_osl.[ch]
-#exclude_lst=$exclude_lst:romtable.S
-#exclude_lst=$exclude_lst:macosx
-#exclude_lst=$exclude_lst:ndis
-#exclude_lst=$exclude_lst:wl_bsd
-#exclude_lst=$exclude_lst:wl_cfe
-#exclude_lst=$exclude_lst:wl_ecos
-#exclude_lst=$exclude_lst:wl_efi
-#exclude_lst=$exclude_lst:wl_iopos
-#exclude_lst=$exclude_lst:wl_vx
-#exclude_lst=$exclude_lst:roml.lds
-#exclude_lst=$exclude_lst:dhd_fbsd
-#exclude_lst=$exclude_lst:dhd_iopos
-#exclude_lst=$exclude_lst:dhd_macos
-#exclude_lst=$exclude_lst:dhd_sdio
-
 source_lst_file=$prj_dir/cscope.files
-#exclude_lst_file=$prj_dir/exclude.files
 
 echo "Generating source file list..."
-#echo $exclude_lst | tr ':' '\n' | sed '/^$/d' > $exclude_lst_file
-#
-#find $prj_dir -type f \( \
-#		-iname '*.c' -o \
-#		-iname '*.cc' -o \
-#		-iname '*.cpp' -o \
-#		-iname '*.h' -o \
-#		-iname '*.s' -o \
-#		-iname '*.java' -o \
-#		-iname '*.aidl' -o \
-#		-iname '*.lds' \
-#		\) | grep -f $exclude_lst_file -v | sort | uniq > $source_lst_file
-
 ag -f --one-device -l --nocolor --nogroup --asm --cc --cpp --java '.' $prj_dir | sort > $source_lst_file.new
 
-filelist_changed=`cmp $source_lst_file $source_lst_file.new 2>&1`
+#filelist_changed=`cmp $source_lst_file $source_lst_file.new 2>&1`
 mv $source_lst_file.new $source_lst_file
 
-echo "Updating gtag file..."
-if [ "$filelist_changed" ]; then
-	gtags -f $source_lst_file &
-else
-	global -u &
-fi
+#echo "Updating gtag file..."
+#if [ "$filelist_changed" ]; then
+#	gtags -f $source_lst_file &
+#else
+#	global -u &
+#fi
 
 echo "Updating ctag file..."
 ctags --C++-kinds=+p --fields=+iaS --extra=+q --langmap=java:+.aidl -L $source_lst_file &
@@ -96,6 +31,4 @@ echo "Updating cscope database..."
 cscope -b -q -i $source_lst_file &
 
 wait
-
-#rm -f $source_lst_file $exclude_lst_file
 echo "Done!"
