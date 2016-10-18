@@ -359,38 +359,6 @@ if neobundle#tap('unite.vim')
 endif
 " }}}
 
-" Unite 2 {{{
-"let g:unite_source_history_yank_enable = 1
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"nnoremap <leader>fa :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-"nnoremap <leader>ff :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-"nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-"nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-"nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-"nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
-"nnoremap <leader>fg :<C-u>Unite grep:.<cr>
-
-"if executable('ag')
-"  " Use ag (the silver searcher)
-"  " https://github.com/ggreer/the_silver_searcher
-"  let g:unite_source_grep_command = 'ag'
-"  let g:unite_source_grep_default_opts =
-"  \ '-i --vimgrep --hidden --ignore ' .
-"  \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-"  let g:unite_source_grep_recursive_opt = ''
-"endif
-"
-"" Custom mappings for the unite buffer
-"autocmd FileType unite call s:unite_settings()
-"function! s:unite_settings()
-"  " Play nice with supertab
-"  let b:SuperTabDisabled=1
-"  " Enable navigation with control-j and control-k in insert mode
-"  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-"  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-"endfunction
-" }}}
-
 " Project: {{{
 nnoremap <C-]>  :lcs find g <C-R>=expand("<cword>")<CR><CR>
 nnoremap <C-[>s :lcs find s <C-R>=expand("<cword>")<CR><CR>
