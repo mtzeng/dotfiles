@@ -241,7 +241,9 @@ nnoremap <C-[>i :lcs find i <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-[>a :lcs find a <C-R>=expand("<cword>")<CR><CR>
 
 let current_project = ''
+let projects = []
 let use_cscope = 1 " 1: cscope; 0: gtags
+
 if (g:use_cscope == 1)
   let cs_prg = "cscope"
   let cs_db = "cscope.out"
@@ -250,14 +252,22 @@ else
   let cs_db = "GTAGS"
 endif
 
+execute "set cscopeprg=" . g:cs_prg
+execute "set cscopequickfix=s-,c-,d-,i-,t-,e-"
+execute "set cscopetag"
+execute "set cscopetagorder=0"
+execute "cs kill -1"
+
 function! s:set_project() " {{{
   "let path = substitute(expand("%:p:h"), "\\", "/", "g")
   let path = resolve(expand("%:p:h"))
 
-  " skip the same project
-  if (g:current_project != '' && path =~ g:current_project)
-    return
-  endif
+  " igonre existing project
+  for project in g:projects
+    if (path =~ project)
+      return
+    endif
+  endfor
 
   " search a readable database
   let db_found = 0
@@ -271,16 +281,11 @@ function! s:set_project() " {{{
     let path = fnamemodify(path, ":h")
   endwhile
 
-  if (db_found == 1)
+  if (db_found)
     let g:current_project = path
+    call add(g:projects, g:current_project)
 
-    execute "set tags=./tags,./TAGS,tags,TAGS," . g:current_project . "/tags"
-    execute "cs kill -1"
-
-    execute "set cscopeprg=" . g:cs_prg
-	execute "set cscopequickfix=s-,c-,d-,i-,t-,e-,a-"
-    execute "set cscopetag"
-    execute "set cscopetagorder=0"
+    execute "set tags+=" . g:current_project . "/tags"
     execute "cs add " . g:current_project . '/' . g:cs_db
   endif
 endfunction " }}}
