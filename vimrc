@@ -219,6 +219,10 @@ nnoremap <silent> <leader>ff :PFiles<CR>
 nnoremap <silent> <leader>ft :BTags<CR>
 nnoremap <silent> <leader>f/ :BLines<CR>
 
+" easymotion
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+
 nmap <leader>vd :VCSVimDiff<cr>
 nmap <leader>va :VCSVerticalAnnotate<cr>
 nmap <leader>vl :VCSLog <c-r>=matchstr(getline('.'), '^\s*\(\d\+\)')<cr><cr>
