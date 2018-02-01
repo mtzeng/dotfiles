@@ -93,15 +93,16 @@ Plug 'itchyny/lightline.vim'
 " {{{
 let g:lightline = {
 \ 'active': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'readonly', 'modified', 'filename' ], [ 'tagbar' ] ]
+\   'left': [ [ 'mode', 'paste', 'ignorecase' ],
+\             [ 'readonly', 'modified', 'filename', 'tagbar' ] ]
 \ },
 \ 'component': {
+\   'ignorecase': '%{&ignorecase?"IGNORECASE":""}',
 \   'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
 \ }
 \}
 " }}}
-Plug 'bootleq/vim-tabline'
+"Plug 'bootleq/vim-tabline'
 "Plug 'bootleq/ShowMarks'
 Plug 'dimasg/vim-mark'
 "Plug 'sjl/gundo.vim'
@@ -359,26 +360,6 @@ noremap tl :tabnext<cr>
 noremap tn :tabnew<cr>
 noremap tc :tabclose<cr>
 noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
-
-" vim-airline
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#show_buffers = 0
-"let g:airline#extensions#tabline#tab_nr_type = 1
-"let g:airline#extensions#tabline#show_tab_nr = 1
-"let g:airline#extensions#tabline#show_tab_type = 0
-"let g:airline#extensions#tabline#fnamemod = ':t'
-"let g:airline#extensions#tabline#tab_min_count = 2
-"let g:airline#extensions#tabline#show_close_button = 0
-
-" vim-tabline
-hi TabLineFill        term=NONE cterm=NONE ctermfg=85 ctermbg=234
-hi TabLineMore        term=NONE cterm=NONE ctermfg=255 ctermbg=238
-hi TabLine            term=NONE cterm=NONE ctermfg=255 ctermbg=238
-hi TabLineNr          term=NONE cterm=NONE ctermfg=255 ctermbg=238
-hi TabLineSplitNr     term=NONE cterm=NONE ctermfg=255 ctermbg=238
-hi TabLineSel         term=NONE cterm=NONE ctermfg=17 ctermbg=190
-hi TabLineNrSel       term=NONE cterm=NONE ctermfg=17 ctermbg=190
-hi TabLineSplitNrSel  term=NONE cterm=NONE ctermfg=17 ctermbg=190
 
 " }}}
 " ============================================================================
