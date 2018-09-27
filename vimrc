@@ -48,6 +48,8 @@ set listchars=tab:»·,trail:·
 " set buffer hidden when unloaded
 set hidden
 
+set colorcolumn=80
+
 
 " }}}
 " ============================================================================
@@ -301,7 +303,7 @@ endfunction " }}}
 " TAB SETTINGS {{{
 " ============================================================================
 
-if has("unix") && !has("mac")
+if has("unix")
   execute "set <M-1>=\e1"
   execute "set <M-2>=\e2"
   execute "set <M-3>=\e3"
@@ -314,19 +316,6 @@ if has("unix") && !has("mac")
   execute "set <M-0>=\e0"
   execute "set <M-,>=\e,"
   execute "set <M-.>=\e."
-elseif has("mac")
-  execute "set <M-1>=¡"
-  execute "set <M-2>=™"
-  execute "set <M-3>=£"
-  execute "set <M-4>=¢"
-  execute "set <M-5>=∞"
-  execute "set <M-6>=§"
-  execute "set <M-7>=¶"
-  execute "set <M-8>=•"
-  execute "set <M-9>=ª"
-  execute "set <M-0>=º"
-  execute "set <M-,>=≤"
-  execute "set <M-.>=≥"
 elseif has("win32")
   execute "set <M-1>=±"
   execute "set <M-2>=²"
@@ -340,6 +329,14 @@ elseif has("win32")
   execute "set <M-0>=°"
   execute "set <M-,>=¬"
   execute "set <M-.>=®"
+endif
+
+" The alt (option) key on macs now behaves like the 'meta' key. This means we
+" can now use <m-x> or similar as maps. This is buffer local, and it can easily
+" be turned off when necessary (for instance, when we want to input special
+" characters) with :set nomacmeta.
+if has("gui_macvim")
+  set macmeta
 endif
 
 noremap <M-1> 1gt
