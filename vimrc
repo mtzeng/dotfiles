@@ -76,6 +76,11 @@ let g:signify_vcs_list = [ 'svn', 'git' ]
 Plug 'majutsushi/tagbar'
 " {{{
 let g:tagbar_sort = 0
+let g:tagbar_type_vimwiki = {
+\ 'ctagstype' : 'vimwiki',
+\ 'kinds' : [ 'h:header' ],
+\ 'sort' : 0
+\ }
 hi TagbarHighlight guifg=black guibg=red ctermfg=black ctermbg=red
 " }}}
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -108,7 +113,7 @@ let g:lightline = {
 "Plug 'bootleq/ShowMarks'
 Plug 'dimasg/vim-mark'
 "Plug 'sjl/gundo.vim'
-"Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/DirDiff.vim', { 'on': 'DirDiff' }
 " {{{
