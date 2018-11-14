@@ -137,10 +137,15 @@ export SSH_ASKPASS=
 # Aliases
 # --------------------------------------------------------------------
 
-alias lh='ls -lh --color=auto'
-alias ll='ls -l --color=auto'
-alias ls='ls --color=auto'
-alias l='ls --color=auto'
+ls_version="$(ls --version 2>/dev/null)"
+if [[ "$ls_version" == *"GNU coreutils"* ]]; then
+  alias ls='ls --color=auto'
+fi
+alias l='ls'
+alias l.='ls -d .*'
+alias ll.='ls -ld .*'
+alias ll='ls -l'
+alias lh='ls -lh'
 #alias grep='grep --color --exclude={cscope.*,tags} --exclude-dir={.svn,builds} --binary-files=without-match'
 alias grep='ag --nogroup -s'
 alias tmux='tmux -2 -u'
