@@ -254,6 +254,9 @@ nnoremap <C-[>a :lcs find a <C-R>=expand("<cword>")<CR><CR>
 
 let current_project = ''
 let projects = []
+" global or gtags not support caller search (only support reference search)
+" So, you can search where a function be called (referenced), but don't know
+" which function calls the searched function
 let use_cscope = 1 " 1: cscope; 0: gtags
 
 if (g:use_cscope == 1)
