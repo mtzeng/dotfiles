@@ -73,7 +73,7 @@ chbuild () {
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-aarch64-gcc-5.3-linux-4.1-glibc-2.24-binutils-2.25/usr/lib/:/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
-      BUILD_PLATFORM=490x; export BUILD_PLATFORM
+      BUILD_PLATFORM=490x_orig; export BUILD_PLATFORM
       ;;
     "4906" | "4908" | "490x")
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
@@ -87,7 +87,7 @@ chbuild () {
       fi
       /tools/bin/ccache -M 5G >/dev/null
 
-      BUILD_PLATFORM=490x_ccache; export BUILD_PLATFORM
+      BUILD_PLATFORM=490x; export BUILD_PLATFORM
       ;;
     "4906_old" | "4908_old" | "490x_old")
       updpath LD_LIBRARY_PATH /projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
