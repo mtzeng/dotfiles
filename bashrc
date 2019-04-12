@@ -58,15 +58,36 @@ chbuild () {
     "" )
       echo $BUILD_PLATFORM
       ;;
+    "-h" )
+      echo "${0} [ 490x | 490x_orig | 490x_old | 470x ]"
+      echo "  490x - 490x ccache build"
+      echo "  490x_orig - 490x wo ccache"
+      echo "  490x_old - 490x 502L04"
+      echo "  470x - 470x platforms"
+      ;;
     "4708" | "4709" | "470x")
       updpath PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin:/projects/bca/tools/linux/hndtools-armeabi-2011.09/bin
       BUILD_PLATFORM=470x; export BUILD_PLATFORM
       ;;
-    "4906" | "4908" | "490x")
+    "4906_orig" | "4908_orig" | "490x_orig")
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-aarch64-gcc-5.3-linux-4.1-glibc-2.24-binutils-2.25/usr/lib/:/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=490x; export BUILD_PLATFORM
+      ;;
+    "4906" | "4908" | "490x")
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
+      updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
+      TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG/cached; export TOOLCHAIN_BASE
+
+      # setup ccache
+      CCACHE_DIR=/tmp/${LOGNAME}_ccache; export CCACHE_DIR
+      if [ ! -d "$CCACHE_DIR" ]; then
+        mkdir $CCACHE_DIR
+      fi
+      /tools/bin/ccache -M 5G >/dev/null
+
+      BUILD_PLATFORM=490x_ccache; export BUILD_PLATFORM
       ;;
     "4906_old" | "4908_old" | "490x_old")
       updpath LD_LIBRARY_PATH /projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
@@ -78,11 +99,12 @@ chbuild () {
   esac;
 }
 
-sndback() {
+sendfile() {
   tar -cf - -C `dirname ${1}` `basename ${1}` | pv -s `du -b ${1} | cut -f 1` | nc -vv `echo $SSH_CLIENT | cut -f 1 -d ' '` 8888
+}
 
-  # for receiver
-  # while true; do nc -l 8888 -w1 | tar -xf -; done
+recvfile() {
+  while true; do nc -l 8888 -w1 | tar -xf -; done
 }
 
 
