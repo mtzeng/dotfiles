@@ -180,6 +180,9 @@ autocmd BufEnter \c*.c,\c*.cc,\c*.cpp,\c*.h,\c*.java,\c*.aidl,\c*.s call s:set_p
 " Remember the line I was on when I repone a file
 " http://askubuntu.com/questions/202075/how-do-i-get-vim-to-remember-the-line-i-was-on-when-i-reopen-a-file
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" Status line not appear sometimes with lazyredraw enabled
+" https://stackoverflow.com/questions/39595011/vim-status-line-wont-immediately-appear-unless-i-press-a-key
+autocmd VimEnter * redraw
 
 
 " }}}
