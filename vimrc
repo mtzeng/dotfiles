@@ -62,6 +62,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " {{{
 command! PFiles call fzf#run(fzf#wrap({'source': 'cat ' . current_project . '/cscope.files'}))
+command! -bang -nargs=* BLines
+  \ call fzf#vim#buffer_lines(<q-args>,
+  \                           {'options': '--multi --bind alt-a:select-all,alt-d:deselect-all'},
+  \                           <bang>0)
 " }}}
 Plug 'easymotion/vim-easymotion'
 
@@ -207,8 +211,11 @@ nnoremap <silent> <f4>   :close<cr>
 nnoremap <silent> <f5>   :NERDTreeToggle %:p:h<cr>
 "nnoremap <silent> <f6>   :let &hlsearch = !&hlsearch<cr>
 nnoremap <silent> <f7>   :lprevious<cr>
+nnoremap <silent> <s-f7> :cprevious<cr>
 nnoremap <silent> <f8>   :lnext<cr>
-nnoremap <silent> <f9>   :QFix<cr>
+nnoremap <silent> <s-f8> :cnext<cr>
+nnoremap <silent> <f9>   :LList<cr>
+nnoremap <silent> <s-f9> :QFix<cr>
 nnoremap <silent> <f12>  :TagbarToggle<cr>
 nnoremap <silent> <c-]>  :tjump<cr>
 "nnoremap <silent> <c-k>  :execute (line('.')-1>line('w0')) ? (line('.')+line('w0'))/2 : line('.')-1<cr>
@@ -374,18 +381,34 @@ noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
 " QUICKFIX SETTINGS {{{
 " ============================================================================
 
+" toggles the location list window.
+command! -bang -nargs=0 LList call LListToggle(<bang>0)
+function! LListToggle(forced)
+  if exists("t:LListToggle")
+    lclose
+    unlet! t:LListToggle
+  else
+    if !empty(getloclist(0))
+      execute "lopen 12"
+      let t:LListToggle=1
+    else
+      echo 'No location list'
+    endif
+  endif
+endfunction
+
 " toggles the quickfix window.
 command! -bang -nargs=0 QFix call QFixToggle(<bang>0)
 function! QFixToggle(forced)
   if exists("t:QFixToggle")
-    lclose
+    cclose
     unlet! t:QFixToggle
   else
-    if !empty(getloclist(0))
-      execute "lopen 12"
+    if !empty(getqflist())
+      execute "copen 12"
       let t:QFixToggle=1
     else
-      echo 'No list'
+      echo 'No quickfix list'
     endif
   endif
 endfunction
