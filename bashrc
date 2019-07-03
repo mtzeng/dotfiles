@@ -85,7 +85,10 @@ chbuild () {
       if [ ! -d "$CCACHE_DIR" ]; then
         mkdir $CCACHE_DIR
       fi
-      /tools/bin/ccache -M 5G >/dev/null
+
+      if [ -f /tools/bin/ccache ]; then
+        /tools/bin/ccache -M 5G >/dev/null
+      fi
 
       BUILD_PLATFORM=490x; export BUILD_PLATFORM
       ;;
