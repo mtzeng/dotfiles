@@ -227,6 +227,8 @@ nnoremap <silent> <c-w>o :only <bar> if &diff != '' <bar> diffoff <bar> endif<cr
 " Bash like keys for the command line
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
+cnoremap <m-b> <s-left>
+cnoremap <m-f> <s-right>
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
@@ -245,7 +247,48 @@ nmap <leader>vd :VCSVimDiff<cr>
 nmap <leader>va :VCSVerticalAnnotate<cr>
 nmap <leader>vl :VCSLog <c-r>=matchstr(getline('.'), '^\s*\(\d\+\)')<cr><cr>
 
+" Setup meta keys
+" {{{
+" Fix meta-keys that break out of Insert mode
+" https://vim.fandom.com/wiki/Fix_meta-keys_that_break_out_of_Insert_mode
+if has("unix")
+  execute "set <M-1>=\e1"
+  execute "set <M-2>=\e2"
+  execute "set <M-3>=\e3"
+  execute "set <M-4>=\e4"
+  execute "set <M-5>=\e5"
+  execute "set <M-6>=\e6"
+  execute "set <M-7>=\e7"
+  execute "set <M-8>=\e8"
+  execute "set <M-9>=\e9"
+  execute "set <M-0>=\e0"
+  execute "set <M-,>=\e,"
+  execute "set <M-.>=\e."
+  execute "set <M-b>=\eb"
+  execute "set <M-f>=\ef"
+elseif has("win32")
+  execute "set <M-1>=±"
+  execute "set <M-2>=²"
+  execute "set <M-3>=³"
+  execute "set <M-4>=´"
+  execute "set <M-5>=µ"
+  execute "set <M-6>=¶"
+  execute "set <M-7>=·"
+  execute "set <M-8>=¸"
+  execute "set <M-9>=¹"
+  execute "set <M-0>=°"
+  execute "set <M-,>=¬"
+  execute "set <M-.>=®"
+endif
 
+" The alt (option) key on macs now behaves like the 'meta' key. This means we
+" can now use <m-x> or similar as maps. This is buffer local, and it can easily
+" be turned off when necessary (for instance, when we want to input special
+" characters) with :set nomacmeta.
+if has("gui_macvim")
+  set macmeta
+endif
+" }}}
 " }}}
 " ============================================================================
 " PROJECT SETTINGS {{{
@@ -320,42 +363,6 @@ endfunction " }}}
 " ============================================================================
 " TAB SETTINGS {{{
 " ============================================================================
-
-if has("unix")
-  execute "set <M-1>=\e1"
-  execute "set <M-2>=\e2"
-  execute "set <M-3>=\e3"
-  execute "set <M-4>=\e4"
-  execute "set <M-5>=\e5"
-  execute "set <M-6>=\e6"
-  execute "set <M-7>=\e7"
-  execute "set <M-8>=\e8"
-  execute "set <M-9>=\e9"
-  execute "set <M-0>=\e0"
-  execute "set <M-,>=\e,"
-  execute "set <M-.>=\e."
-elseif has("win32")
-  execute "set <M-1>=±"
-  execute "set <M-2>=²"
-  execute "set <M-3>=³"
-  execute "set <M-4>=´"
-  execute "set <M-5>=µ"
-  execute "set <M-6>=¶"
-  execute "set <M-7>=·"
-  execute "set <M-8>=¸"
-  execute "set <M-9>=¹"
-  execute "set <M-0>=°"
-  execute "set <M-,>=¬"
-  execute "set <M-.>=®"
-endif
-
-" The alt (option) key on macs now behaves like the 'meta' key. This means we
-" can now use <m-x> or similar as maps. This is buffer local, and it can easily
-" be turned off when necessary (for instance, when we want to input special
-" characters) with :set nomacmeta.
-if has("gui_macvim")
-  set macmeta
-endif
 
 noremap <M-1> 1gt
 noremap <M-2> 2gt
