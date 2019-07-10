@@ -98,7 +98,12 @@ let NERDTreeShowBookmarks = 1
 let g:syntastic_auto_loc_list = 0           " location-list not be opened or closed automatically
 " }}}
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-"Plug 'Valloric/ListToggle'
+Plug 'Valloric/ListToggle'
+" {{{
+let g:lt_location_list_toggle_map = '<f9>'
+let g:lt_quickfix_list_toggle_map = '<s-f9>'
+let g:lt_height = 12
+" }}}
 "Plug 'bling/vim-airline'
 Plug 'itchyny/lightline.vim'
 " {{{
@@ -214,8 +219,6 @@ nnoremap <silent> <f7>   :lprevious<cr>
 nnoremap <silent> <s-f7> :cprevious<cr>
 nnoremap <silent> <f8>   :lnext<cr>
 nnoremap <silent> <s-f8> :cnext<cr>
-nnoremap <silent> <f9>   :LList<cr>
-nnoremap <silent> <s-f9> :QFix<cr>
 nnoremap <silent> <f12>  :TagbarToggle<cr>
 nnoremap <silent> <c-]>  :tjump<cr>
 "nnoremap <silent> <c-k>  :execute (line('.')-1>line('w0')) ? (line('.')+line('w0'))/2 : line('.')-1<cr>
@@ -382,46 +385,6 @@ noremap tl :tabnext<cr>
 noremap tn :tabnew<cr>
 noremap tc :tabclose<cr>
 noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
-
-" }}}
-" ============================================================================
-" QUICKFIX SETTINGS {{{
-" ============================================================================
-
-" toggles the location list window.
-command! -bang -nargs=0 LList call LListToggle(<bang>0)
-function! LListToggle(forced)
-  if exists("t:LListToggle")
-    lclose
-    unlet! t:LListToggle
-  else
-    if !empty(getloclist(0))
-      execute "lopen 12"
-      let t:LListToggle=1
-    else
-      echo 'No location list'
-    endif
-  endif
-endfunction
-
-" toggles the quickfix window.
-command! -bang -nargs=0 QFix call QFixToggle(<bang>0)
-function! QFixToggle(forced)
-  if exists("t:QFixToggle")
-    cclose
-    unlet! t:QFixToggle
-  else
-    if !empty(getqflist())
-      execute "copen 12"
-      let t:QFixToggle=1
-    else
-      echo 'No quickfix list'
-    endif
-  endif
-endfunction
-
-autocmd FileType qf wincmd J  " move quickfix window to the bottom awlays
-
 
 " }}}
 " ============================================================================
