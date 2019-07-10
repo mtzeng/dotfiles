@@ -75,6 +75,7 @@ let g:signify_vcs_list = [ 'svn', 'git' ]
 " }}}
 "Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 "Plug 'gregsexton/gitv'
 
 Plug 'majutsushi/tagbar'
@@ -118,8 +119,6 @@ let g:lightline = {
 \ }
 \}
 " }}}
-"Plug 'bootleq/vim-tabline'
-"Plug 'bootleq/ShowMarks'
 Plug 'dimasg/vim-mark'
 "Plug 'sjl/gundo.vim'
 Plug 'vimwiki/vimwiki'
