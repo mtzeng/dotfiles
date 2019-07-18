@@ -237,9 +237,10 @@ vnoremap > >gv
 nnoremap gb :ls<CR>:b<Space>
 
 " fzf
-nnoremap <silent> <leader>ff :PFiles<CR>
-nnoremap <silent> <leader>ft :BTags<CR>
-nnoremap <silent> <leader>f/ :BLines<CR>
+nnoremap <silent> <leader>ff	:PFiles<CR>
+nnoremap <silent> <leader>ft	:BTags<CR>
+nnoremap <silent> <leader>fat	:Tags<CR>
+nnoremap <silent> <leader>f/	:BLines<CR>
 
 " easymotion
 nmap s <Plug>(easymotion-s2)
