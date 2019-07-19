@@ -12,7 +12,7 @@ prj_dir=`readlink -f $prj_dir`
 source_lst_file=$prj_dir/cscope.files
 
 echo "Generating source file list..."
-ag -f --one-device -l --nocolor --nogroup --asm --cc --cpp --java '.' $prj_dir | sort > $source_lst_file.new
+ag --path-to-ignore ~/.ignore -f --one-device -l --nocolor --nogroup --asm --cc --cpp --java '.' $prj_dir | sort > $source_lst_file.new
 
 #filelist_changed=`cmp $source_lst_file $source_lst_file.new 2>&1`
 mv $source_lst_file.new $source_lst_file
