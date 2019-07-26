@@ -73,6 +73,18 @@ Plug 'mhinz/vim-signify'
 " {{{
 let g:signify_vcs_list = [ 'svn', 'git' ]
 " }}}
+Plug 'mhinz/vim-grepper'
+" {{{
+let g:grepper = {}            " initialize g:grepper with empty dictionary
+runtime plugin/grepper.vim    " initialize g:grepper with default values
+let g:grepper.highlight = 1
+let g:grepper.quickfix = 0
+let g:grepper.open = 0
+let g:grepper.switch = 0
+let g:grepper.jump = 1
+let g:grepper.tools = ['ag', 'grep']
+command! -nargs=1 GrepperBuffer Grepper -buffer -noprompt -query <args>
+" }}}
 "Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
