@@ -171,6 +171,7 @@ alias l.='ls -d .*'
 alias ll.='ls -ld .*'
 alias ll='ls -l'
 alias lh='ls -lh'
+# alias grep
 if command -v rg >/dev/null 2>&1; then
   alias grep='rg --ignore-file ~/.ignore --no-heading'
 elif command -v ag >/dev/null 2>&1; then
@@ -178,7 +179,10 @@ elif command -v ag >/dev/null 2>&1; then
 else
   alias grep='grep --color --exclude={cscope.*,tags} --exclude-dir={.svn,builds} --binary-files=without-match'
 fi
-alias tmux='tmux -2 -u'
+# alias tmux
+if command -v tmux >/dev/null 2>&1; then
+  alias tmux='tmux -2 -u'
+fi
 alias vi='vim -X'
 alias bd=". bd -si"
 
