@@ -82,7 +82,17 @@ let g:grepper.quickfix = 0
 let g:grepper.open = 0
 let g:grepper.switch = 0
 let g:grepper.jump = 1
-let g:grepper.tools = ['ag', 'grep']
+let g:grepper.tools = ['rg', 'ag', 'grep']
+let g:grepper.rg = {
+    \ 'grepprg':    'rg --ignore-file ~/.ignore -H --no-heading --column --color never' . (has('win32') ? ' $* .' : ''),
+    \ 'grepformat': '%f:%l:%c:%m',
+    \ 'escape':     '\^$.*+?()[]{}|',
+    \ }
+let g:grepper.ag = {
+    \ 'grepprg':    'ag --path-to-ignore ~/.ignore --nogroup --nocolor --column',
+    \ 'grepformat': '%l:%m,%f:%l:%m',
+    \ 'escape':     '\^$.*+?()[]{}|',
+    \ }
 command! -nargs=1 GrepperBuffer Grepper -buffer -noprompt -query <args>
 " }}}
 "Plug 'airblade/vim-gitgutter'
@@ -196,7 +206,7 @@ colorscheme last256
 autocmd BufNewFile,BufRead *.aidl   setf java		" android interface definition language
 autocmd FileType java set et nu
 autocmd FileType c,cpp,asm,make set nu
-autocmd BufEnter \c*.c,\c*.cc,\c*.cpp,\c*.h,\c*.java,\c*.aidl,\c*.s call s:set_project() " '\c' to igonre case
+autocmd BufEnter \c*.c,\c*.cc,\c*.cpp,\c*.h,\c*.s call s:set_project() " '\c' to igonre case
 " Remember the line I was on when I repone a file
 " http://askubuntu.com/questions/202075/how-do-i-get-vim-to-remember-the-line-i-was-on-when-i-reopen-a-file
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
