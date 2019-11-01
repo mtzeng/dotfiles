@@ -186,7 +186,7 @@ alias bd=". bd -si"
 # Functions
 # --------------------------------------------------------------------
 
-highlight () { grep --color "$1|$" $2 ; }
+highlight () { grep --color auto "$1|$" $2 ; }
 
 
 # Autostart Tmux
