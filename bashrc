@@ -171,8 +171,13 @@ alias l.='ls -d .*'
 alias ll.='ls -ld .*'
 alias ll='ls -l'
 alias lh='ls -lh'
-#alias grep='grep --color --exclude={cscope.*,tags} --exclude-dir={.svn,builds} --binary-files=without-match'
-alias grep='ag --nogroup -s'
+if command -v rg >/dev/null 2>&1; then
+  alias grep='rg --ignore-file ~/.ignore --no-heading'
+elif command -v ag >/dev/null 2>&1; then
+  alias grep='ag --path-to-ignore ~/.ignore --nogroup -s'
+else
+  alias grep='grep --color --exclude={cscope.*,tags} --exclude-dir={.svn,builds} --binary-files=without-match'
+fi
 alias tmux='tmux -2 -u'
 alias vi='vim -X'
 alias bd=". bd -si"
@@ -187,7 +192,7 @@ highlight () { grep --color "$1|$" $2 ; }
 # Autostart Tmux
 # --------------------------------------------------------------------
 
-if which tmux >/dev/null 2>&1; then
+if command -v tmux >/dev/null 2>&1; then
 #  # if not inside a tmux session, and if no session is started, start a new session
   test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
