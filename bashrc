@@ -205,6 +205,11 @@ fi
 # Fuzzy Finder
 # --------------------------------------------------------------------
 
-export FZF_DEFAULT_OPTS='--reverse'
+if command -v fd >/dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND="fd --type file"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd --type directory"
+fi
+export FZF_DEFAULT_OPTS="--reverse"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
