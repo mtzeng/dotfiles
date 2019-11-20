@@ -35,7 +35,7 @@ set nobackup cursorline ruler showcmd nowrap hlsearch incsearch
 set nu cindent ts=4 sw=4
 set completeopt=menu
 set updatetime=1200
-set diffopt+=vertical
+"set diffopt+=vertical
 set laststatus=2
 " eliminating delays on ESC in vim and zsh
 set timeout timeoutlen=1000 ttimeoutlen=0
