@@ -16,7 +16,7 @@ source_lst_file=$prj_dir/cscope.files
 
 echo "Generating source file list..."
 if command -v rg >/dev/null 2>&1; then
-  rg --ignore-file ~/.ignore --files --follow --one-file-system --type={c,cpp,asm} $prj_dir | sort > $source_lst_file.new
+  rg --ignore-file ~/.ignore --files --one-file-system --type={c,cpp,asm} $prj_dir | sort > $source_lst_file.new
 elif command -v ag >/dev/null 2>&1; then
   ag --path-to-ignore ~/.ignore -f --one-device -l --nocolor --nogroup --asm --cc --cpp '.' $prj_dir | sort > $source_lst_file.new
 else
