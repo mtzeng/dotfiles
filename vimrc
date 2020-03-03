@@ -163,9 +163,7 @@ augroup VCSCommand
 function! s:vcs_vertical_annotate()
 	let orientation_changed = 0
 
-	if !exists("g:VCSCommandSplit")
-		let g:VCSCommandSplit='vertical'
-	elseif  g:VCSCommandSplit == 'horizontal'
+	if !exists("g:VCSCommandSplit") || g:VCSCommandSplit == 'horizontal'
 		let g:VCSCommandSplit='vertical'
 		let orientation_changed = 1
 	endif
