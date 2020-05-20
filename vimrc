@@ -71,7 +71,7 @@ Plug 'easymotion/vim-easymotion'
 
 Plug 'mhinz/vim-signify'
 " {{{
-let g:signify_vcs_list = [ 'svn', 'git' ]
+let g:signify_disable_by_default = 1
 " }}}
 Plug 'mhinz/vim-grepper'
 " {{{
@@ -233,6 +233,7 @@ map <leader>tm :if &mouse == '' <bar> set mouse=a <bar> echo 'mouse on' <bar> el
 map <leader>tn :if &nu == '' <bar> set nu <bar> echo 'line number on' <bar> else <bar> set nonu <bar> echo 'line number off' <bar> endif<cr>
 map <leader>ti :if &ic == '' <bar> set ic <bar> echo 'ignore case' <bar> else <bar> set noic <bar> echo 'case sensitive' <bar> endif<cr>
 map <leader>td :if &diff == '' <bar> diffthis <bar> echo 'diff on' <bar> else <bar> diffoff <bar> echo 'diff off' <bar> endif<cr>
+map <leader>ts :SignifyToggle<cr>
 
 nnoremap <silent> <f4>   :close<cr>
 nnoremap <silent> <f5>   :NERDTreeToggle %:p:h<cr>
