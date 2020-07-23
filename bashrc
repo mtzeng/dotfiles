@@ -70,7 +70,7 @@ chbuild () {
       BUILD_PLATFORM=470x; export BUILD_PLATFORM
       ;;
     "4906_orig" | "4908_orig" | "490x_orig")
-      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-aarch64-gcc-5.3-linux-4.1-glibc-2.24-binutils-2.25/usr/lib/:/usr/lib
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=490x_orig; export BUILD_PLATFORM
@@ -117,7 +117,7 @@ STUFF=/projects/bca/tools/linux-$OSRel/bin:/projects/bca/tools/linux/bin
 updpath PATH $STUFF append
 
 ### setup build path for 490x
-chbuild 490x
+chbuild 490x_orig
 
 ### local bin
 updpath PATH $HOME/bin
@@ -162,6 +162,11 @@ export SSH_ASKPASS=
 # https://scriptingosx.com/2019/06/moving-to-zsh/
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+#
+export LLVMVER=9.0.0
+export GCCVER=9.1.0
+export VIMVER=8.2-p1
+
 
 # Aliases
 # --------------------------------------------------------------------
@@ -189,6 +194,11 @@ if command -v tmux >/dev/null 2>&1; then
 fi
 alias vi='vim -X'
 alias bd=". bd -si"
+
+# alias gdb_python
+GDB_PATH=$HOME/bin/gdb_python
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tools/oss/packages/x86_64-rhel6/python/2.7.5/lib
+alias gdb_dbg="$GDB_PATH/gdb-python --data-directory=$GDB_PATH/data-directory"
 
 
 # Functions
