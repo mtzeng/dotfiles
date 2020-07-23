@@ -158,6 +158,10 @@ export SSH_CLIENT_IP=$(echo $SSH_CLIENT | cut -f 1 -d ' ')
 # https://superuser.com/questions/758039/git-push-pull-keeps-on-trying-to-produce-gui-window
 export SSH_ASKPASS=
 
+# Hide shell deprecated warning on macos after catalina
+# https://scriptingosx.com/2019/06/moving-to-zsh/
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 
 # Aliases
 # --------------------------------------------------------------------
