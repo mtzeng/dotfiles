@@ -64,6 +64,7 @@ chbuild () {
       echo "  490x_orig - 490x wo ccache"
       echo "  490x_old - 490x 502L04"
       echo "  470x - 470x platforms"
+      echo "  devel"
       ;;
     "4708" | "4709" | "470x")
       updpath PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin:/projects/bca/tools/linux/hndtools-armeabi-2011.09/bin
@@ -98,6 +99,12 @@ chbuild () {
       TOOLCHAIN_BASE=/projects/hnd/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=490x_old; export BUILD_PLATFORM
       ;;
+    "devel")
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
+      updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
+      TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
+      BUILD_PLATFORM=devel; export BUILD_PLATFORM
+      ;;
     *) ;;
   esac;
 }
@@ -122,29 +129,25 @@ chbuild 490x_orig
 ### local bin
 updpath PATH $HOME/bin
 
+### nodejs
+if [[ -d $HOME/work/tool/nodejs/bin ]]; then
+  updpath PATH $HOME/work/tool/nodejs/bin
+fi
+
+### clangd
+#if [[ -d $HOME/work/tool/clang/clang+llvm-9.0.0-x86_64-linux-sles11.3/bin ]]; then
+  updpath PATH $HOME/work/tool/clang/clang+llvm-9.0.0-x86_64-linux-sles11.3/bin
+#fi
+
 ### for github TLSv1.2 support
 if [[ -d /tools/oss/packages/x86_64-rhel6/firefox/default/lib ]]; then
   updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/firefox/default/lib
 fi
 
-### for svn
-if [[ -r /tools/lsf/lsfsite ]]; then
-  SITE=`cat /tools/lsf/lsfsite`
-  if [[ $SITE == "sina" ]]; then
-    # Site 'sina' is not defined in hnd tool
-    SITE=hc
-  fi
-  export SITE
-fi
-SUBVERSIONVER=1.8.14; export SUBVERSIONVER
-SVNROOT=http://bcawlan-svn.${SITE}.broadcom.net/svn/bcawlan/proj
-#SVNB=$SVNROOT/branches
-#SVNP=$SVNROOT/project_configs
-#SVNR=$SVNROOT/tags
-#SVNT=$SVNROOT/trunk
+SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
-export P4PORT=pf-irva-bca.broadcom.com:3240
-export P4VER=2012.2
+export P4PORT=ssl:pf-sgn-bca-proxy.devops.broadcom.net:3240
+export P4VER=2013.3
 export P4USER=mt952679
 export P4CLIENT=mt952679
 export P4EDITOR=vi
