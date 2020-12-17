@@ -134,10 +134,10 @@ if [[ -d $HOME/work/tool/nodejs/bin ]]; then
   updpath PATH $HOME/work/tool/nodejs/bin
 fi
 
-### clangd
-#if [[ -d $HOME/work/tool/clang/clang+llvm-9.0.0-x86_64-linux-sles11.3/bin ]]; then
-  updpath PATH $HOME/work/tool/clang/clang+llvm-9.0.0-x86_64-linux-sles11.3/bin
-#fi
+### clangd - c/c++ language server for vim
+if [[ -d $HOME/work/tool/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin ]]; then
+  updpath PATH $HOME/work/tool/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin
+fi
 
 ### for github TLSv1.2 support
 if [[ -d /tools/oss/packages/x86_64-rhel6/firefox/default/lib ]]; then
@@ -166,7 +166,6 @@ export SSH_ASKPASS=
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #
-export LLVMVER=9.0.0
 export GCCVER=9.1.0
 export VIMVER=8.2-p1
 
