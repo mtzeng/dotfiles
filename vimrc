@@ -190,6 +190,7 @@ Plug 'sk1418/last256'
 "Plug 'chriskempson/base16-vim/'
 "Plug 'chriskempson/vim-tomorrow-theme'
 
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
 " TextEdit might fail if hidden is not set.
