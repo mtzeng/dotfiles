@@ -130,13 +130,13 @@ chbuild 490x_orig
 updpath PATH $HOME/bin
 
 ### nodejs
-if [[ -d $HOME/work/tool/nodejs/bin ]]; then
-  updpath PATH $HOME/work/tool/nodejs/bin
+if [[ -d $HOME/work/tools/nodejs/bin ]]; then
+  updpath PATH $HOME/work/tools/nodejs/bin
 fi
 
 ### clangd - c/c++ language server for vim
-if [[ -d $HOME/work/tool/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin ]]; then
-  updpath PATH $HOME/work/tool/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin
+if [[ -d $HOME/work/tools/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin ]]; then
+  updpath PATH $HOME/work/tools/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin
 fi
 
 ### for github TLSv1.2 support
