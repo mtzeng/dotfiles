@@ -162,22 +162,24 @@ autocmd User VCSVimDiffFinish wincmd p
 augroup VCSCommand
 
 function! s:vcs_vertical_annotate()
-	let orientation_changed = 0
+  let origin = ''
 
-	if !exists("g:VCSCommandSplit") || g:VCSCommandSplit == 'horizontal'
-		let g:VCSCommandSplit='vertical'
-		let orientation_changed = 1
-	endif
+  if exists("g:VCSCommandSplit")
+    let origin = g:VCSCommandSplit
+  endif
+  let g:VCSCommandSplit='vertical'
 
-	VCSAnnotate
-	set scrollbind
-	wincmd p
-	set scrollbind
-	wincmd p
+  VCSAnnotate
+  set scrollbind
+  wincmd p
+  set scrollbind
+  wincmd p
 
-	if orientation_changed != 0
-		let g:VCSCommandSplit='horizontal'
-	endif
+  if origin == ''
+    unlet g:VCSCommandSplit
+  elseif origin != g:VCSCommandSplit
+    let g:VCSCommandSplit = origin
+  endif
 endfunction
 command! VCSVerticalAnnotate call s:vcs_vertical_annotate()
 " }}}
@@ -440,7 +442,7 @@ nmap t <Plug>(easymotion-t2)
 
 nmap <leader>vd :VCSVimDiff<cr>
 nmap <leader>va :VCSVerticalAnnotate<cr>
-nmap <leader>vl :VCSLog <c-r>=matchstr(getline('.'), '^\s*\(\d\+\)')<cr><cr>
+nmap <leader>vl :VCSLog <c-r>=matchstr(getline('.'), '^\s*\(\x\+\)')<cr><cr>
 
 " Setup meta keys
 " {{{
