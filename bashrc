@@ -135,8 +135,8 @@ if [[ -d $HOME/work/tools/nodejs/bin ]]; then
 fi
 
 ### clangd - c/c++ language server for vim
-if [[ -d $HOME/work/tools/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin ]]; then
-  updpath PATH $HOME/work/tools/clang/clang+llvm-10.0.0-x86_64-linux-sles11.3/bin
+if [[ -d /tools/oss/packages/x86_64-rhel6/llvm/11.0.0/bin ]]; then
+  updpath PATH /tools/oss/packages/x86_64-rhel6/llvm/11.0.0/bin
 fi
 
 ### for github TLSv1.2 support
