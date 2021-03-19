@@ -67,6 +67,7 @@ chbuild () {
       echo "  devel"
       ;;
     "4708" | "4709" | "470x")
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
       updpath PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin:/projects/bca/tools/linux/hndtools-armeabi-2011.09/bin
       BUILD_PLATFORM=470x; export BUILD_PLATFORM
       ;;
@@ -147,7 +148,7 @@ fi
 SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
 export P4PORT=ssl:pf-sgn-bca-proxy.devops.broadcom.net:3240
-export P4VER=2013.3
+export P4VER=2018.4
 export P4USER=mt952679
 export P4CLIENT=mt952679
 export P4EDITOR=vi
