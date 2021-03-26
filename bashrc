@@ -198,6 +198,9 @@ fi
 alias vi='vim -X'
 alias bd=". bd -si"
 
+# alias perforce
+alias p4v="/tools/perforce/$P4VER/bin.linux26x86_64/p4v"
+
 # alias gdb_python
 GDB_PATH=$HOME/bin/gdb_python
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tools/oss/packages/x86_64-rhel6/python/2.7.5/lib
