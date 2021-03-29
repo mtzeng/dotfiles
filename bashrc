@@ -72,28 +72,22 @@ chbuild () {
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
-    "502L0x")
+    "502L0x" | "502L0x_cache")
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=${1}; export BUILD_PLATFORM
-      ;;
-    "502L0x_cache")
-      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
-      updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
-      TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG/cached; export TOOLCHAIN_BASE
 
-      # setup ccache
-      CCACHE_DIR=/tmp/${LOGNAME}_ccache; export CCACHE_DIR
-      if [ ! -d "$CCACHE_DIR" ]; then
-        mkdir $CCACHE_DIR
+      if [ ${BUILD_PLATFORM} == "502L0x_cache" ]; then
+        # setup ccache
+        CCACHE_DIR=/tmp/${LOGNAME}_ccache; export CCACHE_DIR
+        if [ ! -d "$CCACHE_DIR" ]; then
+          mkdir $CCACHE_DIR
+        fi
+        if [ -f /tools/bin/ccache ]; then
+          /tools/bin/ccache -M 5G >/dev/null
+        fi
       fi
-
-      if [ -f /tools/bin/ccache ]; then
-        /tools/bin/ccache -M 5G >/dev/null
-      fi
-
-      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
     "502L0x_old")
       updpath LD_LIBRARY_PATH /projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
