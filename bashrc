@@ -59,25 +59,26 @@ chbuild () {
       echo $BUILD_PLATFORM
       ;;
     "-h" )
-      echo "${0} [ 490x | 490x_orig | 490x_old | 470x ]"
-      echo "  490x - 490x ccache build"
-      echo "  490x_orig - 490x wo ccache"
-      echo "  490x_old - 490x 502L04"
+      echo "chbuild [ 504L0x | 502L0x | 502L0x_cache | 502L0x_old | 470x ]"
+      echo "  504L0x - 504L01/L02/devel"
+      echo "  502L0x - 502L05/L07/L07p1"
+      echo "  502L0x_cache - 502L0x ccache build"
+      echo "  502L0x_old - 502L04"
       echo "  470x - 470x platforms"
-      echo "  devel"
       ;;
-    "4708" | "4709" | "470x")
-      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
-      updpath PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin:/projects/bca/tools/linux/hndtools-armeabi-2011.09/bin
-      BUILD_PLATFORM=470x; export BUILD_PLATFORM
+    "504L0x" | "devel")
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
+      updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
+      TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
+      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
-    "4906_orig" | "4908_orig" | "490x_orig")
+    "502L0x")
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
-      BUILD_PLATFORM=490x_orig; export BUILD_PLATFORM
+      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
-    "4906" | "4908" | "490x")
+    "502L0x_cache")
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG/cached; export TOOLCHAIN_BASE
@@ -92,19 +93,18 @@ chbuild () {
         /tools/bin/ccache -M 5G >/dev/null
       fi
 
-      BUILD_PLATFORM=490x; export BUILD_PLATFORM
+      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
-    "4906_old" | "4908_old" | "490x_old")
+    "502L0x_old")
       updpath LD_LIBRARY_PATH /projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
       updpath PATH /projects/hnd/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/hnd/tools/linux/BCG; export TOOLCHAIN_BASE
-      BUILD_PLATFORM=490x_old; export BUILD_PLATFORM
+      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
-    "devel")
-      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
-      updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
-      TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
-      BUILD_PLATFORM=devel; export BUILD_PLATFORM
+    "470x" | "4708" | "4709")
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
+      updpath PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin:/projects/bca/tools/linux/hndtools-armeabi-2011.09/bin
+      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
     *) ;;
   esac;
@@ -125,7 +125,7 @@ STUFF=/projects/bca/tools/linux-$OSRel/bin:/projects/bca/tools/linux/bin
 updpath PATH $STUFF append
 
 ### setup build path for 490x
-chbuild 490x_orig
+chbuild 502L0x
 
 ### local bin
 updpath PATH $HOME/bin
