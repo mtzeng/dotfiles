@@ -15,13 +15,23 @@ shopt -s checkwinsize
 # --------------------------------------------------------------------
 
 ### Path update utility
+# Usage: updpath VARNAME /new/path [append]
 updpath() {
-  if [ -z "${!1}" ]; then
-    eval $1="$2"
+
+  # Two parameters at least
+  if [ "$#" -lt 2 ]; then
     return
   fi
 
-  orig_dirlist=${!1}
+  # Expand VARNAME to $orig_dirlist
+  # https://unix.stackexchange.com/questions/68035/foo-and-zsh
+  eval "orig_dirlist=\"\${$1}\""
+
+  # VARNAME is not set. Assign new path to VARNAME directly
+  if [ -z "${orig_dirlist}" ]; then
+    eval $1="$2"
+    return
+  fi
 
   if [[ "x$3" == "xappend" ]]; then
     is_append=1
