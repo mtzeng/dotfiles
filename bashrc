@@ -135,8 +135,8 @@ chbuild 502L0x
 updpath PATH $HOME/bin
 
 ### nodejs
-if [[ -d $HOME/work/tools/nodejs/bin ]]; then
-  updpath PATH $HOME/work/tools/nodejs/bin
+if [[ -d $HOME/work/tools/nodejs/default/bin ]]; then
+  updpath PATH $HOME/work/tools/nodejs/default/bin
 fi
 
 ### clangd - c/c++ language server for vim
