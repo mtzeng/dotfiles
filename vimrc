@@ -32,7 +32,7 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
 set nobackup cursorline ruler showcmd nowrap hlsearch incsearch
-set nu cindent ts=4 sw=4
+set nu rnu cindent ts=4 sw=4
 set completeopt=menu
 set updatetime=1200
 "set diffopt+=vertical
@@ -61,41 +61,19 @@ silent! if plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " {{{
+let g:fzf_list_type = 2
 command! PFiles call fzf#run(fzf#wrap({'source': 'cat ' . current_project . '/cscope.files'}))
 command! -bang -nargs=* BLines
   \ call fzf#vim#buffer_lines(<q-args>,
   \                           {'options': '--multi --bind alt-a:select-all,alt-d:deselect-all'},
   \                           <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --ignore-file ~/.ignore -- ".shellescape(<q-args>),
+  \ 1, fzf#vim#with_preview(), <bang>0)
 " }}}
 Plug 'easymotion/vim-easymotion'
 
 Plug 'mhinz/vim-signify'
-" {{{
-let g:signify_disable_by_default = 1
-" }}}
-Plug 'mhinz/vim-grepper'
-" {{{
-let g:grepper = {}            " initialize g:grepper with empty dictionary
-runtime plugin/grepper.vim    " initialize g:grepper with default values
-let g:grepper.highlight = 1
-let g:grepper.quickfix = 0
-let g:grepper.open = 0
-let g:grepper.switch = 0
-let g:grepper.jump = 1
-let g:grepper.dir = 'file'
-let g:grepper.tools = ['rg', 'ag', 'grep']
-let g:grepper.rg = {
-    \ 'grepprg':    'rg --ignore-file ~/.ignore -H --no-heading --column --color never' . (has('win32') ? ' $* .' : ''),
-    \ 'grepformat': '%f:%l:%c:%m',
-    \ 'escape':     '\^$.*+?()[]{}|',
-    \ }
-let g:grepper.ag = {
-    \ 'grepprg':    'ag --path-to-ignore ~/.ignore --nogroup --nocolor --column',
-    \ 'grepformat': '%l:%m,%f:%l:%m',
-    \ 'escape':     '\^$.*+?()[]{}|',
-    \ }
-command! -nargs=1 GrepperBuffer Grepper -buffer -noprompt -query <args>
-" }}}
 "Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -193,7 +171,7 @@ Plug 'sk1418/last256'
 "Plug 'chriskempson/vim-tomorrow-theme'
 
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'neoclide/coc.nvim', {'tag': '*'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -257,7 +235,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-"nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gk <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -379,8 +357,8 @@ colorscheme last256
 " ============================================================================
 
 autocmd BufNewFile,BufRead *.aidl   setf java		" android interface definition language
-autocmd FileType java set et nu
-autocmd FileType c,cpp,asm,make set nu
+autocmd FileType java set et nu rnu
+autocmd FileType c,cpp,asm,make set nu rnu
 autocmd BufEnter \c*.c,\c*.cc,\c*.cpp,\c*.h,\c*.s call s:set_project() " '\c' to igonre case
 " Remember the line I was on when I repone a file
 " http://askubuntu.com/questions/202075/how-do-i-get-vim-to-remember-the-line-i-was-on-when-i-reopen-a-file
@@ -404,7 +382,7 @@ map <leader>te :if &et == '' <bar> set et <bar> echo 'expandtab on' <bar> else <
 map <leader>th :if &hls == '' <bar> set hls <bar> echo 'hlsearch on' <bar> else <bar> set nohls <bar> echo 'hlsearch off' <bar> endif<cr>
 map <leader>tl :if &list == '' <bar> set list <bar> echo 'list mode on' <bar> else <bar> set nolist <bar> echo 'list mode off' <bar> endif<cr>
 map <leader>tm :if &mouse == '' <bar> set mouse=a <bar> echo 'mouse on' <bar> else <bar> set mouse= <bar> echo 'mouse off' <bar> endif<cr>
-map <leader>tn :if &nu == '' <bar> set nu <bar> echo 'line number on' <bar> else <bar> set nonu <bar> echo 'line number off' <bar> endif<cr>
+map <leader>tn :set nu! rnu!<cr>
 map <leader>ti :if &ic == '' <bar> set ic <bar> echo 'ignore case' <bar> else <bar> set noic <bar> echo 'case sensitive' <bar> endif<cr>
 map <leader>td :if &diff == '' <bar> diffthis <bar> echo 'diff on' <bar> else <bar> diffoff <bar> echo 'diff off' <bar> endif<cr>
 map <leader>ts :SignifyToggle<cr>
