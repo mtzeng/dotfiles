@@ -66,6 +66,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " {{{
 let g:fzf_list_type = 2
+let g:fzf_layout = { 'down': '40%' }
+
 command! PFiles call fzf#run(fzf#wrap({'source': 'cat ' . current_project . '/cscope.files'}))
 command! -bang -nargs=* BLines
   \ call fzf#vim#buffer_lines(<q-args>,
