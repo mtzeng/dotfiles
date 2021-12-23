@@ -53,6 +53,8 @@ set colorcolumn=80
 if executable("rg")
   set grepprg=rg\ --ignore-file\ ~/.ignore\ --vimgrep
 endif
+command! -nargs=+ -bang -complete=file Grep execute 'silent lgrep<bang> <args>' | lopen | wincmd p | redraw!
+command! -nargs=+ -bang -complete=file GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
 
 
 " }}}
