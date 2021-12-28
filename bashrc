@@ -53,10 +53,12 @@ updpath() {
     orig_dirlist=${orig_dirlist/$dir:/}
     orig_dirlist=${orig_dirlist/:$dir/}
 
-    if [[ $is_append -eq 1 ]]; then
-      orig_dirlist=$orig_dirlist:$dir
-    else
-      orig_dirlist=$dir:$orig_dirlist
+    if [[ -d $dir ]]; then
+      if [[ $is_append -eq 1 ]]; then
+        orig_dirlist=$orig_dirlist:$dir
+      else
+        orig_dirlist=$dir:$orig_dirlist
+      fi
     fi
   done
 
@@ -134,20 +136,8 @@ chbuild 502L0x
 ### local bin
 updpath PATH $HOME/bin
 
-### nodejs
-if [[ -d $HOME/work/tools/nodejs/default/bin ]]; then
-  updpath PATH $HOME/work/tools/nodejs/default/bin
-fi
-
-### clangd - c/c++ language server for vim
-if [[ -d /tools/oss/packages/x86_64-rhel6/llvm/11.0.0/bin ]]; then
-  updpath PATH /tools/oss/packages/x86_64-rhel6/llvm/11.0.0/bin
-fi
-
 ### for github TLSv1.2 support
-if [[ -d /tools/oss/packages/x86_64-rhel6/firefox/default/lib ]]; then
-  updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/firefox/default/lib
-fi
+updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/firefox/default/lib
 
 SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
@@ -171,8 +161,12 @@ export SSH_ASKPASS=
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #
-export GCCVER=9.1.0
 export VIMVER=8.2-p1
+export LLVMVER=11.0.0
+#export GCCVER=11.2.0
+#updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
+#export CMAKEVER=3.20.2
+#export BINUTILSVER=2.30
 
 
 # Aliases
@@ -207,7 +201,7 @@ alias p4v="/tools/perforce/$P4VER/bin.linux26x86_64/p4v"
 
 # alias gdb_python
 GDB_PATH=$HOME/bin/gdb_python
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tools/oss/packages/x86_64-rhel6/python/2.7.5/lib
+updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/python/2.7.5/lib append
 alias gdb_dbg="$GDB_PATH/gdb-python --data-directory=$GDB_PATH/data-directory"
 
 
