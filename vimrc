@@ -178,7 +178,6 @@ Plug 'sk1418/last256'
 "Plug 'chriskempson/base16-vim/'
 "Plug 'chriskempson/vim-tomorrow-theme'
 
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -319,7 +318,7 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
