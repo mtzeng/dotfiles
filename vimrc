@@ -348,6 +348,11 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Add option to use location list instead of quickfix for locations
+" https://github.com/neoclide/coc.nvim/issues/1579
+let g:coc_enable_locationlist = 0
+autocmd User CocLocationsChange call setloclist(0, g:coc_jump_locations) | lwindow
 " }}}
 
 call plug#end()
