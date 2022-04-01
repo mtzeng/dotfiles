@@ -7,6 +7,11 @@ shopt -s checkwinsize
 ### Disable CTRL-S and CTRL-Q
 [[ $- =~ i ]] && stty -ixoff -ixon
 
+### Setup backspace key (for vim)
+# https://stackoverflow.com/questions/9701366/vim-backspace-leaves
+# https://stackoverflow.com/questions/15285461/how-can-find-what-and-correspond-to-on-a-keyboard-in-linux
+[[ $- =~ i ]] && stty erase "^?"
+
 ### Disable matching hidden files for tab completion
 [[ $- =~ i ]] && bind 'set match-hidden-files off'
 
