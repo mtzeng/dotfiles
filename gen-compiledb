@@ -42,9 +42,10 @@ grep "hostapd" "${BUILD_LOG}".nic | compiledb -d "${BUILD_DIR}" -o compile_comma
 
 grep "^-------- Building: " "${BUILD_LOG}" | while read BUILD_STR; do
   BUILD_TARGET=$(echo "${BUILD_STR}" | cut -f3 -d' ')
-  [ "${BUILD_TARGET}" = "tcchk" ] && continue
   BUILD_BASE=$(echo "${BUILD_STR}" | cut -f5 -d' ')
-  [ "${BUILD_BASE}" = "wl" ] && continue
+  if [ ! -d "${BUILD_BASE}"/"${BUILD_TARGET}" ]; then
+	  continue
+  fi
 
   CHIP=${BUILD_BASE##*/}
   CHIP=${CHIP%-*} # remove '-ram' or '-roml'
