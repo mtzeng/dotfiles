@@ -132,6 +132,11 @@ Plug 'dimasg/vim-mark'
 "Plug 'sjl/gundo.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/a.vim'
+" {{{
+let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:../shared'
+let g:alternateNoDefaultAlternate = 1
+let g:alternateRelativeFiles = 1
+" }}}
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 " {{{
 let g:DirDiffExcludes = ".svn,.git,.*.swp,*.o,*.o.cmd,tags,cscope.*,*.rej,*.orig"
@@ -215,11 +220,11 @@ endif
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -248,15 +253,13 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
@@ -353,6 +356,11 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " https://github.com/neoclide/coc.nvim/issues/1579
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange call setloclist(0, g:coc_jump_locations) | lwindow
+" }}}
+"Plug 'antoinemadec/coc-fzf'
+" {{{
+let g:coc_fzf_preview = 'right'
+let g:coc_fzf_opts = ['--layout=reverse']
 " }}}
 
 call plug#end()
