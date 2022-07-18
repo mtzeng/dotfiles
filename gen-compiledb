@@ -40,9 +40,7 @@ grep "hostapd" "${BUILD_LOG}".nic | compiledb -d "${BUILD_DIR}" -o compile_comma
 # example of BUILD_STR
 #-------- Building: config_pcie_fdap_release_airiq from /projects/wlan_sw_ae3/mtzengc/504L02/188.25020/bcmdrivers/broadcom/net/wl/impl83/main/build/dongle/43684b0-ram --------
 
-grep "^-------- Building: " "${BUILD_LOG}" | while read BUILD_STR; do
-  BUILD_TARGET=$(echo "${BUILD_STR}" | cut -f3 -d' ')
-  BUILD_BASE=$(echo "${BUILD_STR}" | cut -f5 -d' ')
+grep "^-------- Building: " "${BUILD_LOG}" | while read PREFIX BUILDING BUILD_TARGET FROM BUILD_BASE POSTFIX; do
   if [ ! -d "${BUILD_BASE}"/"${BUILD_TARGET}" ]; then
 	  continue
   fi
