@@ -49,6 +49,8 @@ grep "^-------- Building: " "${BUILD_LOG}" | while read PREFIX BUILDING BUILD_TA
   CHIP=${CHIP%-*} # remove '-ram' or '-roml'
   CHIP=${CHIP^^}
 
+  CHIP=${CHIP/43684B0/43684B1}
+
   echo "generating compile_commands.json.${PROFILE}.${CHIP}"
   CC=$(grep "\-o wlc\.o" "${BUILD_LOG}" | grep "${CHIP}" | cut -f1 -d' ')
   grep "^${CC}" "${BUILD_LOG}" | grep "${CHIP}" > "${BUILD_LOG}"."${CHIP}"
