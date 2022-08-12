@@ -334,6 +334,8 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+let g:coc_disable_startup_warning = 1
+
 " Add option to use location list instead of quickfix for locations
 " https://github.com/neoclide/coc.nvim/issues/1579
 let g:coc_enable_locationlist = 0
