@@ -119,13 +119,16 @@ Plug 'itchyny/lightline.vim'
 " {{{
 let g:lightline = {
 \ 'active': {
-\   'left': [ [ 'mode', 'paste', 'ignorecase' ],
+\   'left': [ [ 'mode', 'paste', 'list', 'ignorecase' ],
 \             [ 'readonly', 'modified', 'filename', 'tagbar' ] ]
 \ },
 \ 'component': {
-\   'ignorecase': '%{&ignorecase?"IGNORECASE":""}',
+\   'paste': '%{&paste?"| PASTE":""}',
+\   'list': '%{&list?"| LIST":""}',
+\   'ignorecase': '%{&ignorecase?"| IGNORECASE":""}',
 \   'tagbar': '%{tagbar#currenttag("%s", "", "f")}',
-\ }
+\ },
+\ 'subseparator': { 'left': '', 'right': '' }
 \}
 " }}}
 Plug 'dimasg/vim-mark'
