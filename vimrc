@@ -131,7 +131,7 @@ let g:lightline = {
 \ 'subseparator': { 'left': '', 'right': '' }
 \}
 " }}}
-Plug 'dimasg/vim-mark'
+Plug 'Yggdroot/vim-mark'
 "Plug 'sjl/gundo.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/a.vim'
@@ -188,6 +188,9 @@ Plug 'sk1418/last256'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
+" May need for vim (not neovim) since coc.nvim calculate byte offset by count
+" utf-8 byte sequence.
+set encoding=utf-8
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
@@ -201,11 +204,13 @@ set updatetime=300
 set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ <SID>CheckBackspace() ? "\<Tab>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
@@ -232,7 +237,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gk <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -266,15 +271,22 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
+" Applying code actions to the selected code block.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
+" Remap keys for apply code actions at the cursor position.
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer.
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap keys for apply refactor code actions.
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 
 " Run the Code Lens action on the current line.
 nmap <leader>cl  <Plug>(coc-codelens-action)
