@@ -136,7 +136,7 @@ STUFF=/projects/bca/tools/linux-$OSRel/bin:/projects/bca/tools/linux/bin
 updpath PATH $STUFF append
 
 ### setup build path for 490x
-chbuild 502L0x
+chbuild devel
 
 ### local bin
 updpath PATH $HOME/bin
