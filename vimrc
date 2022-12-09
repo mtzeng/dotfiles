@@ -80,6 +80,9 @@ command! -bang -nargs=* Rg
   \ 1, fzf#vim#with_preview(), <bang>0)
 " }}}
 Plug 'easymotion/vim-easymotion'
+" {{{
+nmap s <Plug>(easymotion-s)
+" }}}
 
 Plug 'mhinz/vim-signify'
 "Plug 'airblade/vim-gitgutter'
@@ -439,10 +442,6 @@ nnoremap <silent> <leader>ft	:BTags<cr>
 nnoremap <silent> <leader>fs	:Tags<cr>
 nnoremap <silent> <leader>fl	:BLines<cr>
 nnoremap <silent> <leader>fc	:BCommits<cr>
-
-" easymotion
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
 
 nmap <leader>vd :VCSVimDiff<cr>
 nmap <leader>va :VCSVerticalAnnotate<cr>
