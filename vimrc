@@ -75,8 +75,10 @@ command! -bang -nargs=* BLines
   \ call fzf#vim#buffer_lines(<q-args>,
   \                           {'options': '--multi --bind alt-a:select-all,alt-d:deselect-all'},
   \                           <bang>0)
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --ignore-file ~/.ignore -- ".shellescape(<q-args>),
+" Adding -complete=file and --ignore-file. Removing shellescape() for passing
+" extra args to Rg.
+command! -bang -complete=file -nargs=* Rg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --ignore-file ~/.ignore -- ".<q-args>,
   \ 1, fzf#vim#with_preview(), <bang>0)
 " }}}
 Plug 'easymotion/vim-easymotion'
@@ -189,7 +191,11 @@ Plug 'sk1418/last256'
 "Plug 'chriskempson/base16-vim/'
 "Plug 'chriskempson/vim-tomorrow-theme'
 
+if v:version > 802
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+else
+Plug 'neoclide/coc.nvim', {'tag': '*'}
+endif
 " {{{
 " May need for vim (not neovim) since coc.nvim calculate byte offset by count
 " utf-8 byte sequence.
@@ -431,13 +437,16 @@ cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 cnoremap <m-b> <s-left>
 cnoremap <m-f> <s-right>
+" https://stackoverflow.com/questions/11659618/altbackspace-to-delete-words-in-vim
+cnoremap <esc><bs> <c-w>
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
 nnoremap gb :ls<CR>:b<Space>
 
 " fzf
-nnoremap <silent> <leader>ff	:GFiles<cr>
+" https://www.reddit.com/r/vim/comments/dwd5vj/how_to_know_if_i_am_within_a_git_repo/
+nnoremap <silent><expr> <leader>ff	FugitiveHead() != '' ? ':GFiles<cr>' : ':Files<cr>'
 nnoremap <silent> <leader>ft	:BTags<cr>
 nnoremap <silent> <leader>fs	:Tags<cr>
 nnoremap <silent> <leader>fl	:BLines<cr>
