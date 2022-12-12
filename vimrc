@@ -53,8 +53,8 @@ set colorcolumn=80
 if executable("rg")
   set grepprg=rg\ --ignore-file\ ~/.ignore\ --vimgrep
 endif
-command! -nargs=+ -bang -complete=file Grep execute 'silent lgrep<bang> <args>' | lopen | wincmd p | redraw!
-command! -nargs=+ -bang -complete=file GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
+command! -nargs=+ -bang -complete=dir Grep execute 'silent lgrep<bang> <args>' | lopen | wincmd p | redraw!
+command! -nargs=+ -bang -complete=dir GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
 
 
 " }}}
@@ -75,9 +75,9 @@ command! -bang -nargs=* BLines
   \ call fzf#vim#buffer_lines(<q-args>,
   \                           {'options': '--multi --bind alt-a:select-all,alt-d:deselect-all'},
   \                           <bang>0)
-" Adding -complete=file and --ignore-file. Removing shellescape() for passing
+" Adding -complete=dir and --ignore-file. Removing shellescape() for passing
 " extra args to Rg.
-command! -bang -complete=file -nargs=* Rg
+command! -bang -nargs=* -complete=dir Rg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --ignore-file ~/.ignore -- ".<q-args>,
   \ 1, fzf#vim#with_preview(), <bang>0)
 " }}}
