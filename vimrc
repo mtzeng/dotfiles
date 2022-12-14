@@ -263,7 +263,7 @@ function! ShowDocumentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -403,9 +403,8 @@ autocmd VimEnter * redraw
 " MAPPINGS {{{
 " ============================================================================
 
-" set leader to ','
-let mapleader=','
-let g:mapleader=','
+let mapleader=' '
+let g:mapleader=' '
 
 map <leader>tp :if &paste == '' <bar> set paste <bar> echo 'paste on' <bar> else <bar> set nopaste <bar> echo 'paste off' <bar> endif<cr>
 map <leader>te :if &et == '' <bar> set et <bar> echo 'expandtab on' <bar> else <bar> set noet <bar> echo 'expandtab off' <bar> endif<cr>
