@@ -29,8 +29,11 @@ grep "${CC}" "${BUILD_LOG}" > "${BUILD_LOG}".nic
 BUILD_DIR=$(grep -m1 "LINUXDIR=" "${BUILD_LOG}"); BUILD_DIR=${BUILD_DIR#*LINUXDIR=}
 compiledb -f -d "${BUILD_DIR}" -p "${BUILD_LOG}".nic -o compile_commands.json."${PROFILE}".nic
 
-# May need to remove below gcc options
-# -mabi=lp64
+# May need to remove gcc option -mabi=lp64 -march=armv7-a
+# ~/.config/clangd/config.yaml
+#CompileFlags:
+#  Remove: [-mabi=lp64, -march=armv7-a]
+#
 
 # generate hostapd compiledb
 OLDCC="${CC}"
