@@ -55,6 +55,7 @@ if executable("rg")
 endif
 command! -nargs=+ -bang -complete=dir Grep execute 'silent lgrep<bang> <args>' | lopen | wincmd p | redraw!
 command! -nargs=+ -bang -complete=dir GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
+command! -nargs=+ -bang -complete=dir GrepW execute 'silent lgrep<bang> "\W<args>\W"' | lopen | wincmd p | redraw!
 
 
 " }}}
@@ -91,6 +92,7 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 "Plug 'gregsexton/gitv'
+Plug 'junegunn/gv.vim'
 
 Plug 'majutsushi/tagbar'
 " {{{
