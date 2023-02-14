@@ -193,11 +193,7 @@ Plug 'sk1418/last256'
 "Plug 'chriskempson/base16-vim/'
 "Plug 'chriskempson/vim-tomorrow-theme'
 
-if v:version > 802
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-else
-Plug 'neoclide/coc.nvim', {'tag': '*'}
-endif
 " {{{
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
