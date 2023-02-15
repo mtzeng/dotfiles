@@ -131,6 +131,8 @@ recvfile() {
 
 
 ### PATH Configuration on Linux
+updpath PATH /tools/bin
+
 OSRel=`uname -r`
 STUFF=/projects/bca/tools/linux-$OSRel/bin:/projects/bca/tools/linux/bin
 updpath PATH $STUFF append
@@ -166,8 +168,13 @@ export SSH_ASKPASS=
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #
-export VIMVER=8.2-p1
-export LLVMVER=11.0.0
+if [[ "$OSid2" == "centos6" || "$OSid2" == "rhel6" ]]; then
+  export VIMVER=8.2-p1
+  export LLVMVER=11.0.0
+else
+  export VIMVER=8.2-p2
+  export LLVMVER=15.0.7
+fi
 #export GCCVER=11.2.0
 #updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
 #export CMAKEVER=3.20.2
