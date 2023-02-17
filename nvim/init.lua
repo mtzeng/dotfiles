@@ -11,3 +11,6 @@ require("plugin-config.nvim-cmp")
 require("plugin-config.lualine")
 require("plugin-config.hop")
 require("plugin-config.telescope")
+require("plugin-config.gitsigns")
+
+require("plugin-config.netrw")
