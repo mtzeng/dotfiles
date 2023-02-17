@@ -1,0 +1,2 @@
+CompileFlags:
+  Remove: [-mabi=lp64, -march=armv7-a]

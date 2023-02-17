@@ -172,7 +172,7 @@ if [[ "$OSid2" == "centos6" || "$OSid2" == "rhel6" ]]; then
   export VIMVER=8.2-p1
   export LLVMVER=11.0.0
 else
-  export VIMVER=9.0.0814-py3
+  export VIMVER=9.0.0814
   export LLVMVER=14.0.6
 fi
 #export GCCVER=11.2.0
