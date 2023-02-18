@@ -172,7 +172,7 @@ if [[ "$OSid2" == "centos6" || "$OSid2" == "rhel6" ]]; then
   export VIMVER=8.2-p1
   export LLVMVER=11.0.0
 else
-  export VIMVER=9.0.0814
+  export VIMVER=9.0
   export LLVMVER=14.0.6
 fi
 #export GCCVER=11.2.0
@@ -206,6 +206,7 @@ if command -v tmux >/dev/null 2>&1; then
   alias tmux='tmux -2 -u'
 fi
 alias vi='vim -X'
+alias nvi='nvim'
 alias bd=". bd -si"
 
 # alias gdb_python

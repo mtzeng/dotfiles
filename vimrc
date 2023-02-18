@@ -104,7 +104,7 @@ let g:tagbar_type_vimwiki = {
 \ }
 hi TagbarHighlight guifg=black guibg=red ctermfg=black ctermbg=red
 " }}}
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " {{{
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowBookmarks = 1
@@ -415,7 +415,7 @@ map <leader>td :if &diff == '' <bar> diffthis <bar> echo 'diff on' <bar> else <b
 map <leader>ts :SignifyToggle<cr>
 
 nnoremap <silent> <f4>   :close<cr>
-nnoremap <silent> <f5>   :NERDTreeToggle %:p:h<cr>
+nnoremap <silent> <f5>   :Lexplore<cr>
 "nnoremap <silent> <f6>   :let &hlsearch = !&hlsearch<cr>
 nnoremap <silent> <f7>   :lprevious<cr>
 nnoremap <silent> <s-f7> :cprevious<cr>
@@ -588,6 +588,16 @@ noremap tl :tabnext<cr>
 noremap tn :tabnew<cr>
 noremap tc :tabclose<cr>
 noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
+
+" }}}
+" ============================================================================
+" MISC SETTINGS {{{
+" ============================================================================
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 20
 
 " }}}
 " ============================================================================
