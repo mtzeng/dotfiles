@@ -173,7 +173,7 @@ if [[ "$OSid2" == "centos6" || "$OSid2" == "rhel6" ]]; then
   export LLVMVER=11.0.0
 else
   export VIMVER=9.0
-  export LLVMVER=14.0.6
+  export LLVMVER=15.0.7
 fi
 #export GCCVER=11.2.0
 #updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
