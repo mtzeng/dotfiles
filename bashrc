@@ -206,7 +206,6 @@ if command -v tmux >/dev/null 2>&1; then
   alias tmux='tmux -2 -u'
 fi
 alias vi='vim -X'
-alias nvi='nvim'
 alias bd=". bd -si"
 
 # alias gdb_python
