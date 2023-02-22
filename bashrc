@@ -32,12 +32,6 @@ updpath() {
   # https://unix.stackexchange.com/questions/68035/foo-and-zsh
   eval "orig_dirlist=\"\${$1}\""
 
-  # VARNAME is not set. Assign new path to VARNAME directly
-  if [ -z "${orig_dirlist}" ]; then
-    eval $1="$2"
-    return
-  fi
-
   if [[ "x$3" == "xappend" ]]; then
     is_append=1
   else
@@ -149,7 +143,7 @@ updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/firefox/default/lib
 SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
 export P4PORT=ssl:pf-sgn-bca-proxy.devops.broadcom.net:3240
-export P4VER=2018.4
+export P4VER=2021.1
 export P4USER=mt952679
 export P4CLIENT=mt952679
 export P4EDITOR=vi
@@ -168,10 +162,10 @@ export SSH_ASKPASS=
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #
-if [[ "$OSid2" == "centos6" || "$OSid2" == "rhel6" ]]; then
+if [[ "${OSid2}" == "centos6" ]]; then
   export VIMVER=8.2-p1
   export LLVMVER=11.0.0
-else
+elif [[ "${OSid2}" == "centos7" ]]; then
   export VIMVER=9.0
   export LLVMVER=15.0.7
 fi
