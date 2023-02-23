@@ -15,11 +15,12 @@ return require('packer').startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
+    tags = '0.7.2',
     run = ":TSUpdate",
   }
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -28,6 +29,9 @@ return require('packer').startup(function(use)
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
   }
+
+  use 'tpope/vim-fugitive'
+  use 'lewis6991/gitsigns.nvim'
 
   use 'Yggdroot/vim-mark'
   -- use 't9md/vim-quickhl'

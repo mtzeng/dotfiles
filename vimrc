@@ -104,17 +104,6 @@ let g:tagbar_type_vimwiki = {
 \ }
 hi TagbarHighlight guifg=black guibg=red ctermfg=black ctermbg=red
 " }}}
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" {{{
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowBookmarks = 1
-" }}}
-"Plug 'scrooloose/nerdcommenter'
-"Plug 'scrooloose/syntastic'
-" {{{
-let g:syntastic_auto_loc_list = 0           " location-list not be opened or closed automatically
-" }}}
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 Plug 'Valloric/ListToggle'
 " {{{
 let g:lt_location_list_toggle_map = '<f9>'
@@ -125,6 +114,7 @@ let g:lt_height = 12
 Plug 'itchyny/lightline.vim'
 " {{{
 let g:lightline = {
+\ 'colorscheme': 'PaperColor',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste', 'list', 'ignorecase' ],
 \             [ 'readonly', 'modified', 'filename', 'tagbar' ] ]
@@ -187,11 +177,18 @@ command! VCSVerticalAnnotate call s:vcs_vertical_annotate()
 "Plug 'ZoomWin'
 Plug 'vim-scripts/LargeFile'
 
-"Plug 'tomasr/molokai'
 Plug 'sk1418/last256'
-"Plug 'w0ng/vim-hybrid'
-"Plug 'chriskempson/base16-vim/'
-"Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'tomasr/molokai'
+Plug 'NLKNguyen/papercolor-theme'
+" {{{
+let g:PaperColor_Theme_Options = {
+\   'theme': {
+\     'default.dark': {
+\       'transparent_background': 1
+\     }
+\   }
+\ }
+" }}}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " {{{
@@ -377,7 +374,8 @@ endif
 " ============================================================================
 " COLOR SCHEME {{{
 " ============================================================================
-colorscheme last256
+set background=dark
+colorscheme PaperColor
 
 " }}}
 " ============================================================================
@@ -415,7 +413,7 @@ map <leader>td :if &diff == '' <bar> diffthis <bar> echo 'diff on' <bar> else <b
 map <leader>ts :SignifyToggle<cr>
 
 nnoremap <silent> <f4>   :close<cr>
-nnoremap <silent> <f5>   :NERDTreeToggle %:p:h<cr>
+nnoremap <silent> <f5>   :Lexplore<cr>
 "nnoremap <silent> <f6>   :let &hlsearch = !&hlsearch<cr>
 nnoremap <silent> <f7>   :lprevious<cr>
 nnoremap <silent> <s-f7> :cprevious<cr>
@@ -588,6 +586,16 @@ noremap tl :tabnext<cr>
 noremap tn :tabnew<cr>
 noremap tc :tabclose<cr>
 noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
+
+" }}}
+" ============================================================================
+" MISC SETTINGS {{{
+" ============================================================================
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 20
 
 " }}}
 " ============================================================================
