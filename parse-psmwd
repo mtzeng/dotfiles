@@ -17,8 +17,9 @@ fi
 
 DUMP_FILE=$1
 
-PSMWD_MSG=$(grep -m1 " at [[:digit:]]\+ seconds. corerev " ${DUMP_FILE} | tr -d '\r')
-PSMWD_MSG=${PSMWD_MSG%^M}
+PSMWD_MSG=$(grep -m1 " at [[:digit:]]\+ seconds. corerev " ${DUMP_FILE})
+PSMWD_MSG=${PSMWD_MSG%^M}     # remove tailing '^M'
+PSMWD_MSG=${PSMWD_MSG%$'\r'}  # remove tailing '\r' for dos format log file
 if [[ "${VERBOSE}" -gt 0 ]]; then
   echo PSMWD_MSG="${PSMWD_MSG}"
 fi
