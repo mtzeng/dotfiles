@@ -207,6 +207,8 @@ GDB_PATH=$HOME/bin/gdb_python
 updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/python/2.7.5/lib append
 alias gdb_dbg="$GDB_PATH/gdb-python --data-directory=$GDB_PATH/data-directory"
 
+# Enable X11 forwarding and compression
+alias ssh='ssh -X -C'
 
 # Functions
 # --------------------------------------------------------------------
