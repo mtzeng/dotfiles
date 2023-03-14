@@ -174,6 +174,10 @@ fi
 #export CMAKEVER=3.20.2
 #export BINUTILSVER=2.30
 
+# iTerm2 directory color is too dark
+# https://github.com/sorin-ionescu/prezto/issues/1539
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+
 
 # Aliases
 # --------------------------------------------------------------------
