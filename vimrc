@@ -177,8 +177,8 @@ command! VCSVerticalAnnotate call s:vcs_vertical_annotate()
 "Plug 'ZoomWin'
 Plug 'vim-scripts/LargeFile'
 
-Plug 'sk1418/last256'
-Plug 'tomasr/molokai'
+"Plug 'sk1418/last256'
+"lug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
 " {{{
 let g:PaperColor_Theme_Options = {
