@@ -20,11 +20,10 @@ shopt -s checkwinsize
 # --------------------------------------------------------------------
 
 ### Path update utility
-# Usage: updpath VARNAME /new/path [append]
 updpath() {
-
   # Two parameters at least
   if [ "$#" -lt 2 ]; then
+    echo "Usage: ${FUNCNAME[0]} VARNAME /new/path [prepend(default)|append|remove]"
     return
   fi
 
@@ -32,58 +31,55 @@ updpath() {
   # https://unix.stackexchange.com/questions/68035/foo-and-zsh
   eval "orig_dirlist=\"\${$1}\""
 
-  if [[ "x$3" == "xappend" ]]; then
-    is_append=1
-  else
-    is_append=0
-  fi
+  new_dirlist=$2
+  for dir in ${new_dirlist//:/$IFS}; do
+    if [[ -z $orig_dirlist ]]; then
+      break
+    fi
 
-  if [[ $is_append -eq 1 ]]; then
-    new_dirlist=$(echo $2 | tr ':' '\n')
-  else
-    new_dirlist=
-    for dir in $(echo $2 | tr ':' ' '); do
-      new_dirlist="$dir $new_dirlist"
-    done
-  fi
-
-  for dir in $new_dirlist; do
     orig_dirlist=${orig_dirlist/:$dir:/:}
-    orig_dirlist=${orig_dirlist/$dir:/}
-    orig_dirlist=${orig_dirlist/:$dir/}
-
-    if [[ -d $dir ]]; then
-      if [[ $is_append -eq 1 ]]; then
-        orig_dirlist=$orig_dirlist:$dir
-      else
-        orig_dirlist=$dir:$orig_dirlist
-      fi
+    orig_dirlist=${orig_dirlist/#$dir:/}
+    orig_dirlist=${orig_dirlist/%:$dir/}
+    if [[ $orig_dirlist == $dir ]]; then
+      orig_dirlist=
     fi
   done
+
+  if [[ "x$3" == "xremove" ]]; then
+    : # do nothing
+  elif [[ -z $orig_dirlist ]]; then
+    orig_dirlist=$new_dirlist
+  else
+    if [[ "x$3" == "xappend" ]]; then
+      orig_dirlist=$orig_dirlist:$new_dirlist
+    else
+      orig_dirlist=$new_dirlist:$orig_dirlist
+    fi
+  fi
 
   eval $1=$orig_dirlist
 }
 
 chbuild () {
+
+  toolchain_libs=/projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
+  toolchain_libs=$toolchain_libs:/projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
+  toolchain_libs=$toolchain_libs:/projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
+  toolchain_libs=$toolchain_libs:/projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
+
   case ${1} in
     "" )
       echo $BUILD_PLATFORM
       ;;
-    "-h" )
-      echo "chbuild [ 504L0x | 502L0x | 502L0x_cache | 502L0x_old | 470x ]"
-      echo "  504L0x - 504L01/L02/devel"
-      echo "  502L0x - 502L05/L07/L07p1"
-      echo "  502L0x_cache - 502L0x ccache build"
-      echo "  502L0x_old - 502L04"
-      echo "  470x - 470x platforms"
-      ;;
     "504L0x" | "devel")
+      updpath LD_LIBRARY_PATH $toolchain_libs remove
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
     "502L0x" | "502L0x_cache")
+      updpath LD_LIBRARY_PATH $toolchain_libs remove
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
@@ -101,17 +97,26 @@ chbuild () {
       fi
       ;;
     "502L0x_old")
+      updpath LD_LIBRARY_PATH $toolchain_libs remove
       updpath LD_LIBRARY_PATH /projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
       updpath PATH /projects/hnd/tools/linux/hndtools-armeabi-2013.11/bin
       TOOLCHAIN_BASE=/projects/hnd/tools/linux/BCG; export TOOLCHAIN_BASE
       BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
     "470x" | "4708" | "4709")
+      updpath LD_LIBRARY_PATH $toolchain_libs remove
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
       updpath PATH /projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin:/projects/bca/tools/linux/hndtools-armeabi-2011.09/bin
       BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
-    *) ;;
+    *)
+      echo "chbuild [ 504L0x | 502L0x | 502L0x_cache | 502L0x_old | 470x ]"
+      echo "  504L0x - 504L01/L02/devel"
+      echo "  502L0x - 502L05/L07/L07p1"
+      echo "  502L0x_cache - 502L0x ccache build"
+      echo "  502L0x_old - 502L04"
+      echo "  470x - 470x platforms"
+      ;;
   esac;
 }
 
@@ -138,7 +143,9 @@ chbuild devel
 updpath PATH $HOME/bin
 
 ### for github TLSv1.2 support
-updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/firefox/default/lib
+if [[ "${OSid2}" == "centos6" ]]; then
+  updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/firefox/default/lib
+fi
 
 SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
@@ -208,7 +215,7 @@ alias bd=". bd -si"
 
 # alias gdb_python
 GDB_PATH=$HOME/bin/gdb_python
-updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/python/2.7.5/lib append
+#updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/python/2.7.5/lib append
 alias gdb_dbg="$GDB_PATH/gdb-python --data-directory=$GDB_PATH/data-directory"
 
 # Enable X11 forwarding
