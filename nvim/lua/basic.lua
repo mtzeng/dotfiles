@@ -22,3 +22,5 @@ vim.o.wrap = false
 vim.o.listchars = "tab:»·,trail:·"
 
 vim.o.showmode = false
+
+vim.opt.mouse = nil

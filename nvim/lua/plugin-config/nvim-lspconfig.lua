@@ -20,6 +20,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  local on_references = vim.lsp.handlers["textDocument/references"]
+  vim.lsp.handlers["textDocument/references"] = vim.lsp.with(
+    on_references, {
+	  -- Use location list instead of quickfix list
+	  loclist = true,
+    }
+  )
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

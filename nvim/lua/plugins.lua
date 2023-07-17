@@ -15,7 +15,6 @@ return require('packer').startup(function(use)
 
   use {
     "nvim-treesitter/nvim-treesitter",
-    tags = '0.7.2',
     run = ":TSUpdate",
   }
 
@@ -34,11 +33,52 @@ return require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   use 'Yggdroot/vim-mark'
-  -- use 't9md/vim-quickhl'
+  use {
+    'Valloric/ListToggle',
+    config = function()
+      vim.g.lt_location_list_toggle_map = '<f9>'
+      vim.g.lt_quickfix_list_toggle_map = '<s-f9>'
+      vim.g.lt_height = 12
+    end
+  }
+
+  use {
+    'inkarkat/vcscommand.vim',
+    config = vim.cmd[[
+let VCSCommandDisableMappings = 1
+let VCSCommandDeleteOnHide = 1
+augroup VCSCommand
+autocmd User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr>
+autocmd User VCSVimDiffFinish wincmd p
+augroup VCSCommand
+
+function! s:vcs_vertical_annotate()
+  let origin = ''
+
+  if exists("g:VCSCommandSplit")
+    let origin = g:VCSCommandSplit
+  endif
+  let g:VCSCommandSplit='vertical'
+
+  VCSAnnotate
+  set scrollbind
+  wincmd p
+  set scrollbind
+  wincmd p
+
+  if origin == ''
+    unlet g:VCSCommandSplit
+  elseif origin != g:VCSCommandSplit
+    let g:VCSCommandSplit = origin
+  endif
+endfunction
+command! VCSVerticalAnnotate call s:vcs_vertical_annotate()
+    ]]
+  }
 
   use 'nvim-lualine/lualine.nvim'
 
-  use 'sk1418/last256'
+  -- use 'sk1418/last256'
   -- use 'folke/tokyonight.nvim'
   use 'navarasu/onedark.nvim'
 end)
