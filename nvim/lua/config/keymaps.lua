@@ -10,7 +10,7 @@ vim.keymap.set("n", "<leader>tp", "<cmd>set paste!<cr>", { desc = "Toggle Paste"
 
 -- tabs
 vim.keymap.set("n", "tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
-vim.keymap.set("n", "td", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "ts", "<cmd>tab split<cr>", { desc = "Split Tab" })
 
 -- Bash like keys for the command line
