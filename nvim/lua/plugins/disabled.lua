@@ -13,7 +13,7 @@ return {
   -- auto completion
   -- { "hrsh7th/nvim-cmp", enabled = false },
   -- auto pairs
-  { "echasnovski/mini.pairs", enabled = false },
+  -- { "echasnovski/mini.pairs", enabled = false },
   -- surround
   { "echasnovski/mini.surround", enabled = false },
   -- comments
@@ -69,7 +69,7 @@ return {
   -- dashboard
   { "goolord/alpha-nvim", enabled = false },
   -- lsp symbol navigation for lualine
-  { "SmiteshP/nvim-navic", enabled = false },
+  -- { "SmiteshP/nvim-navic", enabled = false },
   -- icons
   { "nvim-tree/nvim-web-devicons", enabled = false },
   -- ui components

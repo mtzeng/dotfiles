@@ -1,6 +1,7 @@
 local Util = require("lazyvim.util")
 
 return {
+  -- telescope
   {
     "telescope.nvim",
     dependencies = {
@@ -81,6 +82,15 @@ return {
       vim.keymap.set('n', '<leader>va', VCSVerticalAnnotate, {})
       vim.keymap.set('n', '<leader>vd', ':VCSVimDiff<cr>', {})
       vim.keymap.set('n', '<leader>vl', ':VCSLog <c-r>=matchstr(getline("."), "^\\s*\\(\\x\\+\\)")<cr><cr>', {})
+    end,
+  },
+  -- ListToggle
+  {
+    "Valloric/ListToggle",
+    init = function()
+      vim.g.lt_location_list_toggle_map = '<f9>'
+      vim.g.lt_quickfix_list_toggle_map = '<s-f9>'
+      vim.g.lt_height = 12
     end,
   },
 }

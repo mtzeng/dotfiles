@@ -23,3 +23,6 @@ vim.keymap.set('c', '<esc><bs>', '<c-w>', {})
 
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
+
+vim.keymap.set("n", "<f7>", "<cmd>lprev<cr>", { desc = "Previous location list item" })
+vim.keymap.set("n", "<f8>", "<cmd>lnext<cr>", { desc = "Next location list item" })
