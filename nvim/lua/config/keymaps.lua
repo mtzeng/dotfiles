@@ -9,6 +9,19 @@ vim.keymap.set('n', '<leader>tn', '<cmd>set number! relativenumber!<cr>', { desc
 vim.keymap.set("n", "<leader>tp", "<cmd>set paste!<cr>", { desc = "Toggle Paste" })
 
 -- tabs
+vim.keymap.set("n", "<M-1>", "1gt", {})
+vim.keymap.set("n", "<M-2>", "2gt", {})
+vim.keymap.set("n", "<M-3>", "3gt", {})
+vim.keymap.set("n", "<M-4>", "4gt", {})
+vim.keymap.set("n", "<M-5>", "5gt", {})
+vim.keymap.set("n", "<M-6>", "6gt", {})
+vim.keymap.set("n", "<M-7>", "7gt", {})
+vim.keymap.set("n", "<M-8>", "8gt", {})
+vim.keymap.set("n", "<M-9>", "9gt", {})
+vim.keymap.set("n", "<M-0>", "10gt", {})
+
+vim.keymap.set("n", "th", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+vim.keymap.set("n", "tl", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
 vim.keymap.set("n", "tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "ts", "<cmd>tab split<cr>", { desc = "Split Tab" })
