@@ -13,3 +13,4 @@ opt.mouse = nil
 opt.scrolloff = 0
 opt.shiftwidth = 4
 opt.tabstop = 4
+opt.timeoutlen = 1000
