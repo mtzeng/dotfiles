@@ -20,8 +20,20 @@ endif
 if has("gui_running")
   set guioptions=gmrLt
 else
-  set t_Co=256
   set mouse=
+endif
+
+" https://stackoverflow.com/questions/61165221/setting-up-onedark-as-a-colorscheme-in-vim
+if has('termguicolors')
+  " Turns on true terminal colors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+  " Turns on 24-bit RGB color support
+  set termguicolors
+
+  " Defines how many colors should be used. (maximum: 256, minimum: 0)
+  set t_Co=256
 endif
 
 set lazyredraw
