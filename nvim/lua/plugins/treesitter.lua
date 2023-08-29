@@ -5,6 +5,9 @@ return {
       ensure_installed = {
         "c",
       },
+      indent = {
+        enable = false
+      },
     },
   },
 }
