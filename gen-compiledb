@@ -40,9 +40,20 @@ OLDCC="${CC}"
 CC=$(grep -m1 "\-o hostapd\W" "${BUILD_LOG}" | tr ' ' '\n' | grep -m1 '.*gcc$')
 if [ "${CC}" != "${OLDCC}" ]; then
   grep "${CC}" "${BUILD_LOG}" >> "${BUILD_LOG}".nic
+  CC="${OLDCC}"
 fi
 BUILD_DIR=$(grep -m1 "make \-C .*hostapd$" "${BUILD_LOG}" | sed "s/^.* \([[:alnum:]/._-]*\)$/\1/")
 grep "hostapd" "${BUILD_LOG}".nic | compiledb -d "${BUILD_DIR}" -o compile_commands.json."${PROFILE}".nic
+
+# generate wpa_supplicant compiledb
+OLDCC="${CC}"
+CC=$(grep -m1 "\-o wpa_supplicant\W" "${BUILD_LOG}" | tr ' ' '\n' | grep -m1 '.*gcc$')
+if [ "${CC}" != "${OLDCC}" ]; then
+  grep "${CC}" "${BUILD_LOG}" >> "${BUILD_LOG}".nic
+  CC="${OLDCC}"
+fi
+BUILD_DIR=$(grep -m1 "make \-C .*wpa_supplicant$" "${BUILD_LOG}" | sed "s/^.* \([[:alnum:]/._-]*\)$/\1/")
+grep "wpa_supplicant" "${BUILD_LOG}".nic | compiledb -d "${BUILD_DIR}" -o compile_commands.json."${PROFILE}".nic
 
 # generate dongle compiledb
 # example of BUILD_STR
