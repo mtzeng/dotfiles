@@ -13,7 +13,7 @@ return {
   -- auto completion
   -- { "hrsh7th/nvim-cmp", enabled = false },
   -- auto pairs
-  -- { "echasnovski/mini.pairs", enabled = false },
+  { "echasnovski/mini.pairs", enabled = false },
   -- surround
   { "echasnovski/mini.surround", enabled = false },
   -- comments
