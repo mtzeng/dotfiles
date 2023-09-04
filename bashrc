@@ -210,7 +210,11 @@ fi
 if command -v tmux >/dev/null 2>&1; then
   alias tmux='tmux -2 -u'
 fi
+if [[ "${OSid2}" == "centos6" ]]; then
 alias vi='vim -X'
+else
+alias vi='nvim'
+fi
 alias bd=". bd -si"
 
 # alias gdb_python
