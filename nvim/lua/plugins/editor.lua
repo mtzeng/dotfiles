@@ -1,6 +1,16 @@
 local Util = require("lazyvim.util")
 
 return {
+  -- flash.nvim
+  {
+    "folke/flash.nvim",
+    opts = {
+      label = {
+        after = false,
+        before = true,
+      },
+    },
+  },
   -- telescope
   {
     "telescope.nvim",
