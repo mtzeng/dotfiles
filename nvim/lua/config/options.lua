@@ -14,3 +14,5 @@ opt.scrolloff = 0
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.timeoutlen = 1000
+-- https://superuser.com/questions/1761071/how-can-i-make-neovim-display-the-search-hit-bottom-continuing-at-top-message
+opt.shortmess:append({ S = true })

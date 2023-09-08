@@ -6,8 +6,9 @@ return {
     "folke/flash.nvim",
     opts = {
       label = {
+        uppercase = false,
         after = false,
-        before = true,
+        before = { 0, 0 },
       },
     },
   },
