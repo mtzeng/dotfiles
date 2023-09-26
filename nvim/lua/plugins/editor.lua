@@ -92,7 +92,7 @@ return {
 
       vim.keymap.set('n', '<leader>va', VCSVerticalAnnotate, {})
       vim.keymap.set('n', '<leader>vd', ':VCSVimDiff<cr>', {})
-      vim.keymap.set('n', '<leader>vl', ':VCSLog <c-r>=matchstr(getline("."), "^\\s*\\(\\x\\+\\)")<cr><cr>', {})
+      vim.keymap.set('n', '<leader>vl', ':VCSLog <c-r>=matchstr(getline(\'.\'), \'^\\s*\\(\\x\\+\\)\')<cr><cr>', {})
     end,
   },
   -- ListToggle
