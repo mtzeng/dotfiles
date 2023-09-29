@@ -2,6 +2,7 @@ return {
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
+    event = 'VimEnter',
     opts = function()
       return {
         --[[add your custom lualine config here]]
@@ -59,7 +60,7 @@ return {
     config = function(_, opts)
       require('lualine').setup(opts)
       -- Auto hide tabline when only one tab page
-      vim.api.nvim_create_autocmd({"TabNew", "TabClosed"}, {
+      vim.api.nvim_create_autocmd({"UIEnter", "TabNew", "TabClosed"}, {
         callback = function()
           require('lualine').hide({place = {'tabline'}, unhide = (vim.fn.tabpagenr('$') > 1)})
         end,
