@@ -3,7 +3,7 @@ return {
   -- lspconfig
   -- { "neovim/nvim-lspconfig", enabled = false },
   -- formatters
-  { "jose-elias-alvarez/null-ls.nvim", enabled = false },
+  { "nvimtools/none-ls.nvim", enabled = false },
   -- cmdline tools and lsp servers
   { "williamboman/mason.nvim", enabled = false },
 
