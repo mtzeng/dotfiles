@@ -16,9 +16,10 @@ return {
           loclist = true,
         }
       )
+      -- disable autoformat
+      vim.g.autoformat = false
     end,
     opts = function(_, opts)
-      opts.autoformat = false
       opts.servers['jsonls'] = nil
       opts.servers['lua_ls'] = nil
     end,
