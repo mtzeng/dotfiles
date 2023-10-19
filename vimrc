@@ -193,18 +193,15 @@ Plug 'vim-scripts/LargeFile'
 "Plug 'sk1418/last256'
 Plug 'tomasr/molokai'
 "{{{
-function! MyHighlights() abort
-  highlight Normal guibg=black
-  highlight LineNr guibg=black
-  highlight SignColumn guibg=black
-endfunction
-
-augroup MyColors
+augroup CustomMolokai
   autocmd!
-  autocmd ColorScheme * call MyHighlights()
+  autocmd ColorScheme molokai
+    \ highlight Normal guibg=black |
+    \ highlight LineNr guibg=black |
+    \ highlight SignColumn guibg=black
 augroup END
 "}}}
-Plug 'NLKNguyen/papercolor-theme'
+"Plug 'NLKNguyen/papercolor-theme'
 " {{{
 let g:PaperColor_Theme_Options = {
 \   'theme': {
