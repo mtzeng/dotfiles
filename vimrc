@@ -106,6 +106,8 @@ Plug 'tpope/vim-surround'
 "Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 
+Plug 'sheerun/vim-polyglot'
+
 Plug 'majutsushi/tagbar'
 " {{{
 let g:tagbar_sort = 0
@@ -126,7 +128,6 @@ let g:lt_height = 12
 Plug 'itchyny/lightline.vim'
 " {{{
 let g:lightline = {
-\ 'colorscheme': 'PaperColor',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste', 'list', 'ignorecase' ],
 \             [ 'readonly', 'modified', 'filename', 'tagbar' ] ]
@@ -190,7 +191,19 @@ command! VCSVerticalAnnotate call s:vcs_vertical_annotate()
 Plug 'vim-scripts/LargeFile'
 
 "Plug 'sk1418/last256'
-"lug 'tomasr/molokai'
+Plug 'tomasr/molokai'
+"{{{
+function! MyHighlights() abort
+  highlight Normal guibg=black
+  highlight LineNr guibg=black
+  highlight SignColumn guibg=black
+endfunction
+
+augroup MyColors
+  autocmd!
+  autocmd ColorScheme * call MyHighlights()
+augroup END
+"}}}
 Plug 'NLKNguyen/papercolor-theme'
 " {{{
 let g:PaperColor_Theme_Options = {
@@ -387,7 +400,7 @@ endif
 " COLOR SCHEME {{{
 " ============================================================================
 set background=dark
-colorscheme PaperColor
+colorscheme molokai
 
 " }}}
 " ============================================================================
