@@ -160,6 +160,7 @@ Plug 'vim-scripts/vcscommand.vim'
 " {{{
 let VCSCommandDisableMappings = 1
 let VCSCommandDeleteOnHide = 1
+
 augroup VCSCommand
 autocmd User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr>
 autocmd User VCSVimDiffFinish wincmd p
@@ -173,11 +174,12 @@ function! s:vcs_vertical_annotate()
   endif
   let g:VCSCommandSplit='vertical'
 
+  set noscrollbind
+  normal! zz
   VCSAnnotate
   set scrollbind
   wincmd p
   set scrollbind
-  wincmd p
 
   if origin == ''
     unlet g:VCSCommandSplit
@@ -459,15 +461,18 @@ cnoremap <esc><bs> <c-w>
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
-nnoremap gb :ls<CR>:b<Space>
+"nnoremap gb :ls<CR>:b<Space>
+nnoremap gb :Buffers<cr>
 
 " fzf
 " https://www.reddit.com/r/vim/comments/dwd5vj/how_to_know_if_i_am_within_a_git_repo/
 nnoremap <silent><expr> <leader>ff	FugitiveHead() != '' ? ':GFiles<cr>' : ':Files<cr>'
-nnoremap <silent> <leader>ft	:BTags<cr>
-nnoremap <silent> <leader>fs	:Tags<cr>
+nnoremap <silent> <leader>fs	:BTags<cr>
+nnoremap <silent> <leader>fS	:Tags<cr>
 nnoremap <silent> <leader>fl	:BLines<cr>
+nnoremap <silent> <leader>fL	:Lines<cr>
 nnoremap <silent> <leader>fc	:BCommits<cr>
+nnoremap <silent> <leader>fC	:Commits<cr>
 
 nmap <leader>vd :VCSVimDiff<cr>
 nmap <leader>va :VCSVerticalAnnotate<cr>
