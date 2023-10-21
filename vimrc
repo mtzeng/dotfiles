@@ -1,7 +1,6 @@
-" vim: set foldmethod=marker foldlevel=0:
-" ============================================================================
+" vim:foldmethod=marker
+
 " BASIC SETTINGS {{{
-" ============================================================================
 
 language C
 syntax on
@@ -69,11 +68,9 @@ command! -nargs=+ -bang -complete=dir Grep execute 'silent lgrep<bang> <args>' |
 command! -nargs=+ -bang -complete=dir GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
 command! -nargs=+ -bang -complete=dir GrepW execute 'silent lgrep<bang> "\W<args>\W"' | lopen | wincmd p | redraw!
 
-
 " }}}
-" ============================================================================
+
 " VIM-PLUG BLOCK {{{
-" ============================================================================
 
 silent! if plug#begin('~/.vim/plugged')
 
@@ -393,18 +390,16 @@ let g:coc_fzf_opts = ['--layout=reverse']
 call plug#end()
 endif
 
-
 " }}}
-" ============================================================================
+
 " COLOR SCHEME {{{
-" ============================================================================
+
 set background=dark
 colorscheme molokai
 
 " }}}
-" ============================================================================
+
 " AUTOCMD {{{
-" ============================================================================
 
 autocmd BufNewFile,BufRead *.aidl   setf java		" android interface definition language
 autocmd FileType java set et nu rnu
@@ -417,11 +412,9 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 " https://stackoverflow.com/questions/39595011/vim-status-line-wont-immediately-appear-unless-i-press-a-key
 autocmd VimEnter * redraw
 
-
 " }}}
-" ============================================================================
+
 " MAPPINGS {{{
-" ============================================================================
 
 let mapleader=' '
 let g:mapleader=' '
@@ -520,10 +513,10 @@ if has("gui_macvim")
   set macmeta
 endif
 " }}}
+
 " }}}
-" ============================================================================
+
 " PROJECT SETTINGS {{{
-" ============================================================================
 
 nnoremap <C-]>  :lcs find g <C-R>=expand("<cword>")<CR><CR>
 nnoremap <C-[>s :lcs find s <C-R>=expand("<cword>")<CR><CR>
@@ -589,11 +582,9 @@ function! s:set_project() " {{{
   endif
 endfunction " }}}
 
-
 " }}}
-" ============================================================================
+
 " TAB SETTINGS {{{
-" ============================================================================
 
 noremap <M-1> 1gt
 noremap <M-2> 2gt
@@ -615,9 +606,8 @@ noremap tc :tabclose<cr>
 noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
 
 " }}}
-" ============================================================================
+
 " MISC SETTINGS {{{
-" ============================================================================
 
 " Netrw
 let g:netrw_banner = 0
@@ -625,4 +615,3 @@ let g:netrw_liststyle = 3
 let g:netrw_winsize = 20
 
 " }}}
-" ============================================================================
