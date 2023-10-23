@@ -2,25 +2,8 @@
 
 " BASIC SETTINGS {{{
 
-language C
 syntax on
-
 set encoding=utf-8
-set langmenu=en_US
-let $LANG = 'en_US'
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-if has('win32') || has('win64')
-  set runtimepath=~/.vim,$VIMRUNTIME
-  set viminfo+=n$USERPROFILE
-endif
-
-if has("gui_running")
-  set guioptions=gmrLt
-else
-  set mouse=
-endif
 
 " https://stackoverflow.com/questions/61165221/setting-up-onedark-as-a-colorscheme-in-vim
 if has('termguicolors')
@@ -42,8 +25,11 @@ set ttyfast
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-set nobackup cursorline ruler showcmd nowrap hlsearch incsearch
-set nu rnu cindent ts=4 sw=4
+set showcmd nobackup nowrap hlsearch incsearch
+set cindent tabstop=4 shiftwidth=4
+set cursorline colorcolumn=80
+set number relativenumber
+set splitbelow splitright
 set completeopt=menu
 set updatetime=1200
 "set diffopt+=vertical
@@ -56,17 +42,8 @@ set listchars=tab:»·,trail:·
 "set list
 "hi SpecialKey ctermbg=red guibg=red
 
-" set buffer hidden when unloaded
+" set buffer hidden when unloaded (switch buffers without saving the file)
 set hidden
-
-set colorcolumn=80
-
-if executable("rg")
-  set grepprg=rg\ --ignore-file\ ~/.ignore\ --vimgrep
-endif
-command! -nargs=+ -bang -complete=dir Grep execute 'silent lgrep<bang> <args>' | lopen | wincmd p | redraw!
-command! -nargs=+ -bang -complete=dir GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
-command! -nargs=+ -bang -complete=dir GrepW execute 'silent lgrep<bang> "\W<args>\W"' | lopen | wincmd p | redraw!
 
 " }}}
 
@@ -613,5 +590,13 @@ noremap ts :tab split <bar> if &diff != '' <bar> diffoff <bar> endif<cr>
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_winsize = 20
+
+" Grep
+if executable("rg")
+  set grepprg=rg\ --ignore-file\ ~/.ignore\ --vimgrep
+endif
+command! -nargs=+ -bang -complete=dir Grep execute 'silent lgrep<bang> <args>' | lopen | wincmd p | redraw!
+command! -nargs=+ -bang -complete=dir GrepAdd execute 'silent lgrepadd<bang> <args>' | lopen | wincmd p | redraw!
+command! -nargs=+ -bang -complete=dir GrepW execute 'silent lgrep<bang> "\W<args>\W"' | lopen | wincmd p | redraw!
 
 " }}}
