@@ -249,5 +249,8 @@ if command -v fd >/dev/null 2>&1; then
   export FZF_ALT_C_COMMAND="fd --type directory"
 fi
 export FZF_DEFAULT_OPTS="--reverse"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# unset POSIXLY_CORRECT for fzf scripts
+[ ${POSIXLY_CORRECT+x} ] && unset POSIXLY_CORRECT
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
