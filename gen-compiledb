@@ -35,25 +35,51 @@ compiledb -f -d "${BUILD_DIR}" -p "${BUILD_LOG}".nic -o compile_commands.json."$
 #  Remove: [-mabi=lp64, -march=armv7-a]
 #
 
-# generate hostapd compiledb
-OLDCC="${CC}"
-CC=$(grep -m1 "\-o hostapd\W" "${BUILD_LOG}" | tr ' ' '\n' | grep -m1 '.*gcc$')
-if [ "${CC}" != "${OLDCC}" ]; then
-  grep "${CC}" "${BUILD_LOG}" >> "${BUILD_LOG}".nic
-  CC="${OLDCC}"
-fi
-BUILD_DIR=$(grep -m1 "make \-C .*hostapd$" "${BUILD_LOG}" | sed "s/^.* \([[:alnum:]/._-]*\)$/\1/")
-grep "hostapd" "${BUILD_LOG}".nic | compiledb -d "${BUILD_DIR}" -o compile_commands.json."${PROFILE}".nic
+CC_LIST=${CC}
 
-# generate wpa_supplicant compiledb
-OLDCC="${CC}"
-CC=$(grep -m1 "\-o wpa_supplicant\W" "${BUILD_LOG}" | tr ' ' '\n' | grep -m1 '.*gcc$')
-if [ "${CC}" != "${OLDCC}" ]; then
-  grep "${CC}" "${BUILD_LOG}" >> "${BUILD_LOG}".nic
-  CC="${OLDCC}"
-fi
-BUILD_DIR=$(grep -m1 "make \-C .*wpa_supplicant$" "${BUILD_LOG}" | sed "s/^.* \([[:alnum:]/._-]*\)$/\1/")
-grep "wpa_supplicant" "${BUILD_LOG}".nic | compiledb -d "${BUILD_DIR}" -o compile_commands.json."${PROFILE}".nic
+# Utility - generate compiledb for APPs and their components, e.g.,
+# 'hostapd' and its sub component 'hostapd_cli'.
+# This is because we cannot get BUILD_DIR directly from sub component's name).
+gen_app_compiledb() {
+  if [[ -z "${1}" ]]; then
+    exit
+  fi
+
+  APP=$1
+
+  CC=$(grep -m1 "\-o ${APP}\W" "${BUILD_LOG}" | tr ' ' '\n' | grep -m1 '.*gcc$')
+  found=0
+  for x in $CC_LIST; do
+	if [[ "${CC}" == "${x}" ]]; then
+      found=1
+	  break
+	fi
+  done
+
+  if [[ ${found} -eq 0 ]]; then
+    CC_LIST="${CC_LIST} ${CC}"
+    grep "${CC}" "${BUILD_LOG}" >> "${BUILD_LOG}".nic
+  fi
+
+  rm -f "${BUILD_LOG}"."${APP}"
+
+  # Iterate each component (main APP and others) for object files
+  for COMPONENT in "${@}"; do
+    for x in $(grep -m1 "\-o ${COMPONENT}\W" "${BUILD_LOG}".nic | tr ' ' '\n' | grep "\.o$"); do
+      grep "\-o ${x}\W" "${BUILD_LOG}".nic >> "${BUILD_LOG}"."${APP}"
+    done
+  done
+
+  # Get BUILD_DIR from main APP
+  BUILD_DIR=$(grep -m1 "make \-C /.*\W${APP}\W" "${BUILD_LOG}" | sed "s/^.* \-C \([[:alnum:]/._-]*\)\( .*\)\?$/\1/")
+  compiledb -d "${BUILD_DIR}" -p "${BUILD_LOG}"."${APP}" -o compile_commands.json."${PROFILE}".nic
+
+  rm -f "${BUILD_LOG}"."${APP}"
+}
+
+gen_app_compiledb "hostapd" "hostapd_cli"
+gen_app_compiledb "wpa_supplicant" "wpa_cli"
+gen_app_compiledb "qosmgmtd" "qm_cli"
 
 # generate dongle compiledb
 # example of BUILD_STR
