@@ -40,20 +40,20 @@ CC_LIST=${CC}
 # Utility - generate compiledb for APPs.
 # The 1st arg is APP name for BUILD_DIR and the rest args are APP's components.
 gen_app_compiledb() {
-  if [[ $# -le 2 ]]; then
-    exit
-  fi
-
   APP=$1
-  shift
-
   rm -f "${BUILD_LOG}"."${APP}"
+
+  # Get BUILD_DIR from main APP
+  BUILD_DIR=$(grep -m1 "make \-C /.*\W${APP}\W" "${BUILD_LOG}" | sed "s/^.* \-C \([[:alnum:]/._-]*\)\( .*\)\?$/\1/")
 
   # Iterate each APP components for object files
   for COMPONENT in $@; do
-    BUILD_COMPONENT=$(grep -m1 "\-o ${COMPONENT}[[:space:]$]" "${BUILD_LOG}")
+    COMPONENT_BUILD_LINE=$(grep -m1 "\-o ${COMPONENT} " "${BUILD_LOG}")
+    if [[ -z "${COMPONENT_BUILD_LINE}" ]]; then
+      continue
+    fi
 
-    CC=$(echo "${BUILD_COMPONENT}" | tr ' ' '\n' | grep -m1 '.*gcc$')
+    CC=$(echo "${COMPONENT_BUILD_LINE}" | tr ' ' '\n' | grep -m1 '.*gcc$')
     found=0
     for x in $CC_LIST; do
       if [[ "${CC}" == "${x}" ]]; then
@@ -67,22 +67,30 @@ gen_app_compiledb() {
       grep "${CC}" "${BUILD_LOG}" >> "${BUILD_LOG}".nic
     fi
 
-    for x in $(echo "${BUILD_COMPONENT}" | tr ' ' '\n' | grep "\.o$"); do
-      grep "\-o ${x}\W" "${BUILD_LOG}".nic >> "${BUILD_LOG}"."${APP}"
+    for x in $(echo "${COMPONENT_BUILD_LINE}" | tr ' ' '\n' | grep "\.o$"); do
+      SRC_FILE="${x%.o}.c"
+      SRC_FILE_ABSOLUTE_PATH="${BUILD_DIR}"/"${SRC_FILE}"
+      if [[ ! -f "${SRC_FILE_ABSOLUTE_PATH}" ]]; then
+        SRC_FILE_ABSOLUTE_PATH=$(fd -g "${SRC_FILE##*/}" "${BUILD_DIR}")
+      fi
+
+      if [[ -f "${SRC_FILE_ABSOLUTE_PATH}" ]]; then
+        grep "\-o ${x}\W" "${BUILD_LOG}".nic | sed "s| [[:alnum:]/._-]*${SRC_FILE}| ${SRC_FILE_ABSOLUTE_PATH}|" >> "${BUILD_LOG}"."${APP}"
+      else
+        grep "\-o ${x}\W" "${BUILD_LOG}".nic >> "${BUILD_LOG}"."${APP}"
+      fi
     done
   done
 
   if [[ -f "${BUILD_LOG}"."${APP}" ]]; then
-    # Get BUILD_DIR from main APP
-    BUILD_DIR=$(grep -m1 "make \-C /.*\W${APP}\W" "${BUILD_LOG}" | sed "s/^.* \-C \([[:alnum:]/._-]*\)\( .*\)\?$/\1/")
-    compiledb -d "${BUILD_DIR}" -p "${BUILD_LOG}"."${APP}" -o compile_commands.json."${PROFILE}".nic
+    compiledb -p "${BUILD_LOG}"."${APP}" -o compile_commands.json."${PROFILE}".nic
     #rm -f "${BUILD_LOG}"."${APP}"
   fi
 }
 
-gen_app_compiledb "hostapd" "hostapd" "hostapd_cli"
-gen_app_compiledb "wpa_supplicant" "wpa_supplicant" "wpa_cli"
-gen_app_compiledb "qosmgmtd" "qosmgmtd" "qm_cli"
+gen_app_compiledb "hostapd" "hostapd_cli"
+gen_app_compiledb "wpa_supplicant" "wpa_cli"
+gen_app_compiledb "qosmgmtd" "qm_cli"
 gen_app_compiledb "wbd2" "wbd_master" "wbd_slave" "wb_cli" "libwbdshared.so" "libwbdhld.so"
 
 # generate dongle compiledb
