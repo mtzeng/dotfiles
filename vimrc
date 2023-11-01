@@ -54,17 +54,20 @@ silent! if plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " {{{
-let g:fzf_list_type = 2
+let g:fzf_vim = {}
+let g:fzf_vim.command_prefix = 'Fzf'
+" Use location list instead of quickfix list
+let g:fzf_vim.listproc = { list -> fzf#vim#listproc#location(list) }
 let g:fzf_layout = { 'down': '40%' }
 
-command! PFiles call fzf#run(fzf#wrap({'source': 'cat ' . current_project . '/cscope.files'}))
-command! -bang -nargs=* BLines
+command! FzfPFiles call fzf#run(fzf#wrap({'source': 'cat ' . current_project . '/cscope.files'}))
+command! -bang -nargs=* FzfBLines
   \ call fzf#vim#buffer_lines(<q-args>,
   \                           {'options': '--multi --bind alt-a:select-all,alt-d:deselect-all'},
   \                           <bang>0)
 " Adding -complete=dir and --ignore-file. Removing shellescape() for passing
 " extra args to Rg.
-command! -bang -nargs=* -complete=dir Rg
+command! -bang -nargs=* -complete=dir FzfRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case --ignore-file ~/.ignore -- ".<q-args>,
   \ 1, fzf#vim#with_preview(), <bang>0)
 " }}}
@@ -432,17 +435,17 @@ cnoremap <esc><bs> <c-w>
 vnoremap < <gv
 vnoremap > >gv
 "nnoremap gb :ls<CR>:b<Space>
-nnoremap gb :Buffers<cr>
+nnoremap gb :FzfBuffers<cr>
 
 " fzf
 " https://www.reddit.com/r/vim/comments/dwd5vj/how_to_know_if_i_am_within_a_git_repo/
-nnoremap <silent><expr> <leader>ff	FugitiveHead() != '' ? ':GFiles<cr>' : ':Files<cr>'
-nnoremap <silent> <leader>fs	:BTags<cr>
-nnoremap <silent> <leader>fS	:Tags<cr>
-nnoremap <silent> <leader>fl	:BLines<cr>
-nnoremap <silent> <leader>fL	:Lines<cr>
-nnoremap <silent> <leader>fc	:BCommits<cr>
-nnoremap <silent> <leader>fC	:Commits<cr>
+nnoremap <silent><expr> <leader>sf	FugitiveHead() != '' ? ':FzfGFiles<cr>' : ':FzfFiles<cr>'
+nnoremap <silent> <leader>st	:FzfBTags<cr>
+nnoremap <silent> <leader>sl	:FzfBLines<cr>
+nnoremap <silent> <leader>sL	:FzfLines<cr>
+nnoremap <silent> <leader>sc	:FzfBCommits<cr>
+nnoremap <silent> <leader>sC	:FzfCommits<cr>
+nnoremap <silent> <leader>sm	:FzfMarks<cr>
 
 nmap <leader>vd :VCSVimDiff<cr>
 nmap <leader>va :VCSVerticalAnnotate<cr>
