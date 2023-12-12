@@ -2,8 +2,6 @@ return {
   -- lsp
   -- lspconfig
   -- { "neovim/nvim-lspconfig", enabled = false },
-  -- formatters
-  { "nvimtools/none-ls.nvim", enabled = false },
   -- cmdline tools and lsp servers
   { "williamboman/mason.nvim", enabled = false },
 
@@ -48,8 +46,18 @@ return {
   -- todo comments
   { "folke/todo-comments.nvim", enabled = false },
 
+  -- formatting
+  { "stevearc/conform.nvim", enabled = false },
+
+  -- linting
+  { "mfussenegger/nvim-lint", enabled = false },
+
   -- treesitter
   -- { "nvim-treesitter/nvim-treesitter", enabled = false },
+  -- Show context of the current function
+  -- { "nvim-treesitter/nvim-treesitter-context", enabled = false },
+  -- Automatically add closing tags for HTML and JSX
+  -- { "windwp/nvim-ts-autotag", enabled = false },
 
   -- ui
   -- Better `vim.notify()`
@@ -66,14 +74,13 @@ return {
   -- { "echasnovski/mini.indentscope", enabled = false },
   -- noicer ui
   { "folke/noice.nvim", enabled = false },
-  -- dashboard
-  { "goolord/alpha-nvim", enabled = false },
-  -- lsp symbol navigation for lualine
-  -- { "SmiteshP/nvim-navic", enabled = false },
   -- icons
   { "nvim-tree/nvim-web-devicons", enabled = false },
   -- ui components
   { "MunifTanjim/nui.nvim", enabled = false },
+  -- dashboard
+  { "goolord/alpha-nvim", enabled = false },
+  -- { "nvimdev/dashboard-nvim", enabled = false },
 
   -- util
   -- measure startuptime
