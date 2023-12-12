@@ -213,7 +213,7 @@ fi
 if [[ "${OSid2}" == "centos6" ]]; then
 alias vi='vim -X'
 else
-alias vi='vim -X'
+alias vi='nvim'
 fi
 alias bd=". bd -si"
 
