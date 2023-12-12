@@ -121,4 +121,5 @@ return {
     end,
   },
   { import = "lazyvim.plugins.extras.editor.navic" },
+  { import = "lazyvim.plugins.extras.editor.symbols-outline" },
 }

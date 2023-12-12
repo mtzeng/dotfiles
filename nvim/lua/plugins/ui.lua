@@ -2,7 +2,7 @@ return {
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
-    event = 'VimEnter',
+    -- event = 'VimEnter',
     opts = function(_, opts)
       -- opts.options.icons_enabled = false
       opts.options.theme = 'onedark'
