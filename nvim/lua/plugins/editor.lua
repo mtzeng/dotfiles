@@ -53,7 +53,23 @@ return {
       vim.cmd("highlight SignifySignAdd    ctermfg=green  guifg=#00ff00 cterm=NONE gui=NONE")
       vim.cmd("highlight SignifySignDelete ctermfg=red    guifg=#ff0000 cterm=NONE gui=NONE")
       vim.cmd("highlight SignifySignChange ctermfg=yellow guifg=#ffff00 cterm=NONE gui=NONE")
-    end
+
+      vim.cmd("nmap <leader>gj <plug>(signify-next-hunk)")
+      vim.cmd("nmap <leader>gk <plug>(signify-prev-hunk)")
+      vim.cmd("nmap <leader>gJ 9999<leader>gj")
+      vim.cmd("nmap <leader>gK 9999<leader>gk")
+
+      vim.cmd([[
+        function! s:show_current_hunk() abort
+          let h = sy#util#get_hunk_stats()
+          if !empty(h)
+            echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
+          endif
+        endfunction
+
+        autocmd User SignifyHunk call s:show_current_hunk()
+      ]])
+    end,
   },
   -- vim-mark
   { "Yggdroot/vim-mark" },
@@ -104,4 +120,5 @@ return {
       vim.g.lt_height = 12
     end,
   },
+  { import = "lazyvim.plugins.extras.editor.navic" },
 }
