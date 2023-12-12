@@ -24,14 +24,5 @@ return {
       opts.servers['lua_ls'] = nil
     end,
   },
-  {
-    "p00f/clangd_extensions.nvim",
-    opts = {
-      extensions = {
-        inlay_hints = {
-          only_current_line = true,
-        },
-      },
-    },
-  },
+  { import = "lazyvim.plugins.extras.lang.clangd" },
 }
