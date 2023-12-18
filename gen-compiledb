@@ -69,10 +69,13 @@ gen_app_compiledb() {
 
     for x in $(echo "${COMPONENT_BUILD_LINE}" | tr ' ' '\n' | grep "\.o$"); do
       SRC_FILE="${x%.o}.c"
-      SRC_FILE_ABSOLUTE_PATH="${BUILD_DIR}"/"${SRC_FILE}"
+      SRC_FILE_ABSOLUTE_PATH="${SRC_FILE}"
       if [[ ! -f "${SRC_FILE_ABSOLUTE_PATH}" ]]; then
-        SRC_FILE_ABSOLUTE_PATH=$(fd -g "${SRC_FILE##*/}" "${BUILD_DIR}")
-      fi
+        SRC_FILE_ABSOLUTE_PATH="${BUILD_DIR}"/"${SRC_FILE}"
+        if [[ ! -f "${SRC_FILE_ABSOLUTE_PATH}" ]]; then
+          SRC_FILE_ABSOLUTE_PATH=$(fd -g "${SRC_FILE##*/}" "${BUILD_DIR}")
+        fi
+	  fi
 
       if [[ -f "${SRC_FILE_ABSOLUTE_PATH}" ]]; then
         grep "\-o ${x}\W" "${BUILD_LOG}".nic | sed "s| [[:alnum:]/._-]*${SRC_FILE}| ${SRC_FILE_ABSOLUTE_PATH}|" >> "${BUILD_LOG}"."${APP}"
@@ -83,7 +86,7 @@ gen_app_compiledb() {
   done
 
   if [[ -f "${BUILD_LOG}"."${APP}" ]]; then
-    compiledb -p "${BUILD_LOG}"."${APP}" -o compile_commands.json."${PROFILE}".nic
+    compiledb -d "${BUILD_DIR}" -p "${BUILD_LOG}"."${APP}" -o compile_commands.json."${PROFILE}".nic
     #rm -f "${BUILD_LOG}"."${APP}"
   fi
 }
