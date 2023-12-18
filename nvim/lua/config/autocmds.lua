@@ -10,5 +10,5 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- No diff folding to avoiding LSP performance problem
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c", "cpp" },
-  command = "setlocal diffopt=internal,filler,closeoff,context:99999",
+  command = "if line('$') > 10000 | setlocal diffopt=internal,filler,closeoff,context:99999 | endif",
 })
