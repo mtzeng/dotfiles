@@ -37,6 +37,8 @@ vim.keymap.set('c', '<esc><bs>', '<c-w>', {})
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
 
+vim.keymap.set("n", "<leader>xl", "<cmd>LToggle<cr>", { desc = "Toggle location list" })
+vim.keymap.set("n", "<leader>xq", "<cmd>QToggle<cr>", { desc = "Toggle quickfix list" })
 vim.keymap.set("n", "[l", "<cmd>lprev<cr>", { desc = "Previous location list item" })
 vim.keymap.set("n", "[L", "<cmd>lfirst<cr>", { desc = "First location list item" })
 vim.keymap.set("n", "]l", "<cmd>lnext<cr>", { desc = "Next location list item" })

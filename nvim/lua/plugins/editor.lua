@@ -115,8 +115,6 @@ return {
   {
     "Valloric/ListToggle",
     init = function()
-      vim.g.lt_location_list_toggle_map = '<f9>'
-      vim.g.lt_quickfix_list_toggle_map = '<s-f9>'
       vim.g.lt_height = 12
     end,
   },
