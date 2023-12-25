@@ -86,7 +86,7 @@ return {
   -- measure startuptime
   { "dstein64/vim-startuptime", enabled = false },
   -- session management
-  -- { "folke/persistence.nvim", enabled = false },
+  { "folke/persistence.nvim", enabled = false },
   -- library used by other plugins
   -- { "nvim-lua/plenary.nvim", enabled = false },
 }
