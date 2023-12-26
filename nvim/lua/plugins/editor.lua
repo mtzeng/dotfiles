@@ -32,12 +32,8 @@ return {
             ["<esc>"] = require("telescope.actions").close,
           },
         },
-      },
-      pickers = {
-        git_files = { theme = "ivy", },
-        live_grep = { theme = "ivy", },
-        current_buffer_fuzzy_find = { theme = "ivy", },
-        lsp_document_symbols = { theme = "ivy", },
+        sorting_strategy = "ascending",
+        layout_strategy = "bottom_pane",
       },
     },
     keys = {
