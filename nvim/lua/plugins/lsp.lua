@@ -12,8 +12,11 @@ return {
       local on_references = vim.lsp.handlers["textDocument/references"]
       vim.lsp.handlers["textDocument/references"] = vim.lsp.with(
         on_references, {
-          -- Use location list instead of quickfix list
-          loclist = true,
+          on_list = function(options)
+            local height = vim.g.lt_height or 10
+            vim.fn.setloclist(0, {}, ' ', options)
+            vim.api.nvim_command('lopen ' .. height)
+          end,
         }
       )
       -- disable autoformat
