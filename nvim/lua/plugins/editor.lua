@@ -38,8 +38,6 @@ return {
     },
     keys = {
       { "<leader>gf", "<cmd>Telescope git_files<CR>", desc = "files" },
-      { "<leader>sG", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-      { "<leader>sg", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
     },
   },
   -- vim-signify
