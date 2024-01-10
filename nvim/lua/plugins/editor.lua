@@ -114,6 +114,4 @@ return {
       vim.g.lt_height = 12
     end,
   },
-  { import = "lazyvim.plugins.extras.editor.navic" },
-  { import = "lazyvim.plugins.extras.editor.symbols-outline" },
 }

@@ -27,5 +27,4 @@ return {
       opts.servers['lua_ls'] = nil
     end,
   },
-  { import = "lazyvim.plugins.extras.lang.clangd" },
 }
