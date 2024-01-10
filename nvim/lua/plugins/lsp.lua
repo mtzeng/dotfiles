@@ -5,7 +5,7 @@ return {
       local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- change a keymap
+      -- change keymaps - use built-in lsp instead of telescope
       keys[#keys + 1] = { "gd", vim.lsp.buf.definition, bufopts }
       keys[#keys + 1] = { "gr", vim.lsp.buf.references, bufopts }
 
