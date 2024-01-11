@@ -2,7 +2,6 @@ return {
   -- lualine
   {
     "nvim-lualine/lualine.nvim",
-    -- event = 'VimEnter',
     opts = function(_, opts)
       -- opts.options.icons_enabled = false
       opts.options.theme = 'onedark'
@@ -36,12 +35,20 @@ return {
           end,
         })
     end,
-    config = function(_, opts)
-      require('lualine').setup(opts)
+    init = function()
       -- Auto hide tabline when only one tab page
       vim.api.nvim_create_autocmd({"UIEnter", "TabNew", "TabClosed"}, {
-        callback = function()
+        callback = function(e)
           require('lualine').hide({place = {'tabline'}, unhide = (vim.fn.tabpagenr('$') > 1)})
+          -- BufReadPost autocmd for jumping to the last position is not
+          -- triggered when creating a autocmd with UIEnter/VimEnter here.
+          -- So, we try to jump to last postiion with VimEnter/UIEnter events.
+          if string.find(e.event, "Enter") ~= nil then
+            pos = vim.fn.line("'\"")
+            if pos > 1 and pos <= vim.fn.line("$") then
+              vim.fn.execute("normal! g'\"")
+            end
+          end
         end,
       })
     end,
