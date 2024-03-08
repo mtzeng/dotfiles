@@ -34,7 +34,7 @@ return {
   -- Flash
   -- { "folke/flash.nvim", enabled = false },
   -- which-key
-  { "folke/which-key.nvim", enabled = false },
+  -- { "folke/which-key.nvim", enabled = false },
   -- git signs
   { "lewis6991/gitsigns.nvim", enabled = false },
   -- references
