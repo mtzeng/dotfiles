@@ -6,7 +6,6 @@ return {
     "folke/flash.nvim",
     opts = {
       label = {
-        uppercase = false,
         after = false,
         before = { 0, 0 },
       },
@@ -35,9 +34,6 @@ return {
         sorting_strategy = "ascending",
         layout_strategy = "bottom_pane",
       },
-    },
-    keys = {
-      { "<leader>gf", "<cmd>Telescope git_files<CR>", desc = "files" },
     },
   },
   -- vim-signify
