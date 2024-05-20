@@ -10,15 +10,10 @@ return {
   -- coding.lua
   -- auto completion
   -- { "hrsh7th/nvim-cmp", enabled = false },
-  -- snippets
-  { "L3MON4D3/LuaSnip", enabled = false },
   -- auto pairs
   { "echasnovski/mini.pairs", enabled = false },
-  -- Fast and feature-rich surround actions.
-  { "echasnovski/mini.surround", enabled = false },
   -- comments
   { "JoosepAlviste/nvim-ts-context-commentstring", enabled = false },
-  { "echasnovski/mini.comment", enabled = false },
   -- Better text-objects
   { "echasnovski/mini.ai", enabled = false },
 
@@ -33,7 +28,7 @@ return {
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   -- search/replace in multiple files
   { "nvim-pack/nvim-spectre", enabled = false },
-  -- fuzzy finder
+  -- Fuzzy finder.
   -- { "nvim-telescope/telescope.nvim", enabled = false },
   -- Flash
   -- { "folke/flash.nvim", enabled = false },
@@ -41,10 +36,6 @@ return {
   -- { "folke/which-key.nvim", enabled = false },
   -- git signs
   { "lewis6991/gitsigns.nvim", enabled = false },
-  -- Automatically highlights other instances of the word under your cursor.
-  { "RRethy/vim-illuminate", enabled = false },
-  -- buffer remove
-  { "echasnovski/mini.bufremove", enabled = false },
   -- better diagnostics list and others
   { "folke/trouble.nvim", enabled = false },
   -- todo comments
@@ -75,8 +66,6 @@ return {
   -- { "nvim-lualine/lualine.nvim", enabled = false },
   -- indent guides for Neovim
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
-  -- Active indent guide and indent text objects.
-  -- { "echasnovski/mini.indentscope", enabled = false },
   -- Highly experimental plugin that completely replaces the UI
   { "folke/noice.nvim", enabled = false },
   -- icons
@@ -87,8 +76,6 @@ return {
   -- { "nvimdev/dashboard-nvim", enabled = false },
 
   -- util
-  -- measure startuptime
-  { "dstein64/vim-startuptime", enabled = false },
   -- Session management.
   { "folke/persistence.nvim", enabled = false },
   -- library used by other plugins
