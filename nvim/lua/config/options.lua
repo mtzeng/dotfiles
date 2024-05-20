@@ -9,7 +9,7 @@ opt.expandtab = false
 opt.ignorecase = false
 opt.list = false
 opt.listchars = { tab='»·', trail='·' }
-opt.mouse = nil
+opt.mouse = ""
 opt.scrolloff = 0
 opt.shiftwidth = 4
 opt.tabstop = 4
