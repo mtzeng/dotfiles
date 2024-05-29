@@ -13,7 +13,7 @@ return {
   -- auto pairs
   { "echasnovski/mini.pairs", enabled = false },
   -- comments
-  { "JoosepAlviste/nvim-ts-context-commentstring", enabled = false },
+  { "folke/ts-comments.nvim", enabled = false },
   -- Better text-objects
   { "echasnovski/mini.ai", enabled = false },
 
@@ -44,14 +44,13 @@ return {
   -- formatting.lua
   { "stevearc/conform.nvim", enabled = false },
 
-  -- linting
+  -- linting.lua
   { "mfussenegger/nvim-lint", enabled = false },
 
   -- treesitter.lua
   -- Treesitter
   -- { "nvim-treesitter/nvim-treesitter", enabled = false },
-  -- Show context of the current function
-  -- { "nvim-treesitter/nvim-treesitter-context", enabled = false },
+  -- { "nvim-treesitter/nvim-treesitter-textobjects", enabled = false },
   -- Automatically add closing tags for HTML and JSX
   -- { "windwp/nvim-ts-autotag", enabled = false },
 
@@ -75,7 +74,7 @@ return {
   { "goolord/alpha-nvim", enabled = false },
   -- { "nvimdev/dashboard-nvim", enabled = false },
 
-  -- util
+  -- util.lua
   -- Session management.
   { "folke/persistence.nvim", enabled = false },
   -- library used by other plugins
