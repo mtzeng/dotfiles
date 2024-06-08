@@ -8,6 +8,8 @@ return {
       -- change keymaps - use built-in lsp instead of telescope
       keys[#keys + 1] = { "gd", vim.lsp.buf.definition, bufopts }
       keys[#keys + 1] = { "gr", vim.lsp.buf.references, bufopts }
+      keys[#keys + 1] = { "]]", false }
+      keys[#keys + 1] = { "[[", false }
 
       local on_references = vim.lsp.handlers["textDocument/references"]
       vim.lsp.handlers["textDocument/references"] = vim.lsp.with(
