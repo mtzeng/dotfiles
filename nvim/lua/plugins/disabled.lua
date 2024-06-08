@@ -10,12 +10,17 @@ return {
   -- coding.lua
   -- auto completion
   -- { "hrsh7th/nvim-cmp", enabled = false },
+  -- snippets
+  -- { "nvim-cmp", enabled = false },
   -- auto pairs
   { "echasnovski/mini.pairs", enabled = false },
   -- comments
   { "folke/ts-comments.nvim", enabled = false },
   -- Better text-objects
   { "echasnovski/mini.ai", enabled = false },
+  -- { "folke/lazydev.nvim", eanbled = false },
+  -- Manage libuv types with lazy.
+  -- { "Bilal2453/luvit-meta", enabled = false },
 
   -- colorscheme.lua
   -- tokyonight
@@ -37,7 +42,7 @@ return {
   -- git signs
   { "lewis6991/gitsigns.nvim", enabled = false },
   -- better diagnostics list and others
-  { "folke/trouble.nvim", enabled = false },
+  -- { "folke/trouble.nvim", enabled = false },
   -- todo comments
   { "folke/todo-comments.nvim", enabled = false },
 
@@ -52,7 +57,7 @@ return {
   -- { "nvim-treesitter/nvim-treesitter", enabled = false },
   -- { "nvim-treesitter/nvim-treesitter-textobjects", enabled = false },
   -- Automatically add closing tags for HTML and JSX
-  -- { "windwp/nvim-ts-autotag", enabled = false },
+  { "windwp/nvim-ts-autotag", enabled = false },
 
   -- ui.lua
   -- Better `vim.notify()`
@@ -71,8 +76,7 @@ return {
   { "nvim-tree/nvim-web-devicons", enabled = false },
   -- ui components
   { "MunifTanjim/nui.nvim", enabled = false },
-  { "goolord/alpha-nvim", enabled = false },
-  -- { "nvimdev/dashboard-nvim", enabled = false },
+  { "nvimdev/dashboard-nvim", enabled = false },
 
   -- util.lua
   -- Session management.
