@@ -33,8 +33,6 @@ return {
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   -- search/replace in multiple files
   { "nvim-pack/nvim-spectre", enabled = false },
-  -- Fuzzy finder.
-  -- { "nvim-telescope/telescope.nvim", enabled = false },
   -- Flash
   -- { "folke/flash.nvim", enabled = false },
   -- which-key
@@ -62,8 +60,6 @@ return {
   -- ui.lua
   -- Better `vim.notify()`
   { "rcarriga/nvim-notify", enabled = false },
-  -- better vim.ui
-  { "stevearc/dressing.nvim", enabled = false },
   -- bufferline
   { "akinsho/bufferline.nvim", enabled = false },
   -- statusline
@@ -73,7 +69,7 @@ return {
   -- Highly experimental plugin that completely replaces the UI
   { "folke/noice.nvim", enabled = false },
   -- icons
-  { "nvim-tree/nvim-web-devicons", enabled = false },
+  { "echasnovski/mini.icons", enabled = false },
   -- ui components
   { "MunifTanjim/nui.nvim", enabled = false },
   { "nvimdev/dashboard-nvim", enabled = false },
