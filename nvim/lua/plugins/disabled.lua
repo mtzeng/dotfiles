@@ -32,7 +32,7 @@ return {
   -- file explorer
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   -- search/replace in multiple files
-  { "nvim-pack/nvim-spectre", enabled = false },
+  { "MagicDuck/grug-far.nvim", enabled = false },
   -- Flash
   -- { "folke/flash.nvim", enabled = false },
   -- which-key
