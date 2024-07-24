@@ -1,30 +1,17 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    init = function()
-      local bufopts = { noremap=true, silent=true, buffer=bufnr }
-
+    opts = function(_, opts)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- change keymaps - use built-in lsp instead of telescope
-      keys[#keys + 1] = { "gd", vim.lsp.buf.definition, bufopts }
-      keys[#keys + 1] = { "gr", vim.lsp.buf.references, bufopts }
+      -- change a keymap - no reuse_win
+      keys[#keys + 1] = { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = false }) end, desc = "Goto Definition", has = "definition" }
+      -- change a keymap - use built-in lsp instead of telescope for loclist
+      keys[#keys + 1] = { "gr", vim.lsp.buf.references, { loclist = true }, desc = "References" }
+      -- disable keymaps
       keys[#keys + 1] = { "]]", false }
       keys[#keys + 1] = { "[[", false }
 
-      local on_references = vim.lsp.handlers["textDocument/references"]
-      vim.lsp.handlers["textDocument/references"] = vim.lsp.with(
-        on_references, {
-          on_list = function(options)
-            local height = vim.g.lt_height or 10
-            vim.fn.setloclist(0, {}, ' ', options)
-            vim.api.nvim_command('lopen ' .. height)
-          end,
-        }
-      )
-      -- disable autoformat
-      vim.g.autoformat = false
-    end,
-    opts = function(_, opts)
+      -- disable lang servers
       opts.servers['jsonls'] = nil
       opts.servers['lua_ls'] = nil
     end,
