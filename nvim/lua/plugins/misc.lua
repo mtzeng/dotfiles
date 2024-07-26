@@ -13,4 +13,11 @@ return {
     "vimwiki/vimwiki",
     keys = { { "<leader>wt", "<Plug>VimwikiTabIndex", desc = "Open default wiki index file in a new tab." } },
   },
+  -- vim-dirdiff
+  {
+    "will133/vim-dirdiff",
+    init = function()
+      vim.treesitter.language.register("diff", "dirdiff")
+    end,
+  }
 }
