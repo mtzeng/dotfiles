@@ -29,6 +29,7 @@ return {
         mappings = {
           i = {
             ["<esc>"] = require("telescope.actions").close,
+            ['<C-y>'] = require('telescope.actions.layout').toggle_preview
           },
         },
         sorting_strategy = "ascending",
