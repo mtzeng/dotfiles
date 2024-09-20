@@ -14,6 +14,10 @@ return {
       -- disable lang servers
       opts.servers['jsonls'] = nil
       opts.servers['lua_ls'] = nil
+
+      -- disable inlay hints
+      -- https://github.com/LazyVim/LazyVim/discussions/3191
+      opts.inlay_hints.enabled = false
     end,
   },
 }
