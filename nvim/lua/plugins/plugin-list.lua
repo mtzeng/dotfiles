@@ -30,7 +30,7 @@ return {
 
   -- editor.lua
   -- file explorer
-  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+  -- { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   -- search/replace in multiple files
   { "MagicDuck/grug-far.nvim", enabled = false },
   -- Flash
@@ -41,7 +41,7 @@ return {
   { "lewis6991/gitsigns.nvim", enabled = false },
   -- better diagnostics list and others
   -- { "folke/trouble.nvim", enabled = false },
-  -- todo comments
+  -- Finds and lists all of the TODO, HACK, BUG, etc comment
   { "folke/todo-comments.nvim", enabled = false },
 
   -- formatting.lua
@@ -55,11 +55,9 @@ return {
   -- { "nvim-treesitter/nvim-treesitter", enabled = false },
   -- { "nvim-treesitter/nvim-treesitter-textobjects", enabled = false },
   -- Automatically add closing tags for HTML and JSX
-  { "windwp/nvim-ts-autotag", enabled = false },
+  -- { "windwp/nvim-ts-autotag", enabled = false },
 
   -- ui.lua
-  -- Better `vim.notify()`
-  { "rcarriga/nvim-notify", enabled = false },
   -- bufferline
   { "akinsho/bufferline.nvim", enabled = false },
   -- statusline
