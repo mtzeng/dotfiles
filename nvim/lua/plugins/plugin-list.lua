@@ -69,7 +69,7 @@ return {
   -- icons
   { "echasnovski/mini.icons", enabled = false },
   -- ui components
-  { "MunifTanjim/nui.nvim", enabled = false },
+  -- { "MunifTanjim/nui.nvim", enabled = false },
   { "nvimdev/dashboard-nvim", enabled = false },
 
   -- util.lua
