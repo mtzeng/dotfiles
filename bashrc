@@ -142,11 +142,6 @@ chbuild devel
 ### local bin
 updpath PATH $HOME/bin
 
-### for github TLSv1.2 support
-if [[ "${OSid2}" == "centos6" ]]; then
-  updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/firefox/default/lib
-fi
-
 SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
 export P4PORT=ssl:pf-sgn-bca-proxy.devops.broadcom.net:3240
@@ -158,28 +153,33 @@ export P4EDITOR=vi
 GIT_SSL_NO_VERIFY=true; export GIT_SSL_NO_VERIFY
 export HISTCONTROL=ignorespace:erasedups
 
-export SSH_CLIENT_IP=$(echo $SSH_CLIENT | cut -f 1 -d ' ')
-
 # Avoiding a popup window for asking password
 # https://superuser.com/questions/758039/git-push-pull-keeps-on-trying-to-produce-gui-window
 export SSH_ASKPASS=
 
-# Hide shell deprecated warning on macos after catalina
-# https://scriptingosx.com/2019/06/moving-to-zsh/
-export BASH_SILENCE_DEPRECATION_WARNING=1
+if [[ "${OSTYPE}" == "darwin"* ]]; then
+  # Hide shell deprecated warning on macos after catalina
+  # https://scriptingosx.com/2019/06/moving-to-zsh/
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+fi
 
-#
 if [[ "${OSid2}" == "centos6" ]]; then
   export VIMVER=8.2-p1
   export LLVMVER=11.0.0
+
+  ### for github TLSv1.2 support
+  updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/firefox/default/lib
 elif [[ "${OSid2}" == "centos7" ]]; then
   export VIMVER=9.0.0814
-  export LLVMVER=14.0.6
+  export LLVMVER=16.0.6
+
+  export GCCVER=11.2.0; export CC=/tools/bin/gcc
+  #updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
+  #export CMAKEVER=3.20.2
+  #export BINUTILSVER=2.30
+elif [[ "${OSid2}" == "centos8" ]]; then
+  echo "${OSid2}" not supported
 fi
-#export GCCVER=11.2.0
-#updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
-#export CMAKEVER=3.20.2
-#export BINUTILSVER=2.30
 
 # iTerm2 directory color is too dark
 # https://github.com/sorin-ionescu/prezto/issues/1539
