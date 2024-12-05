@@ -19,8 +19,6 @@ return {
   -- Better text-objects
   { "echasnovski/mini.ai", enabled = false },
   -- { "folke/lazydev.nvim", eanbled = false },
-  -- Manage libuv types with lazy.
-  -- { "Bilal2453/luvit-meta", enabled = false },
 
   -- colorscheme.lua
   -- tokyonight
@@ -70,7 +68,7 @@ return {
   { "echasnovski/mini.icons", enabled = false },
   -- ui components
   -- { "MunifTanjim/nui.nvim", enabled = false },
-  { "nvimdev/dashboard-nvim", enabled = false },
+  { "folke/snacks.nvim", enabled = false },
 
   -- util.lua
   -- Session management.
