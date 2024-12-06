@@ -68,7 +68,7 @@ return {
   { "echasnovski/mini.icons", enabled = false },
   -- ui components
   -- { "MunifTanjim/nui.nvim", enabled = false },
-  { "folke/snacks.nvim", enabled = false },
+  -- { "folke/snacks.nvim", enabled = false },
 
   -- util.lua
   -- Session management.
