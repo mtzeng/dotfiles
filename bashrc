@@ -121,7 +121,7 @@ chbuild () {
 }
 
 sendfile() {
-  tar -cf - -C `dirname ${1}` `basename ${1}` | pv -s `du -b ${1} | cut -f 1` | nc -vv `echo $SSH_CLIENT | cut -f 1 -d ' '` 8888
+  tar -cf - -C `dirname ${1}` `basename ${1}` | pv -s `du -b ${1} | cut -f 1` | nc -vv `echo $SSH_CONNECTION | cut -f 1 -d ' '` 8888
 }
 
 recvfile() {
@@ -144,7 +144,7 @@ updpath PATH $HOME/bin
 
 SUBVERSIONVER=1.9.2; export SUBVERSIONVER
 
-export P4PORT=ssl:pf-sgn-bca-proxy.devops.broadcom.net:3240
+export P4PORT=ssl:pf-bca-3240-mas.devops.broadcom.net:3240
 export P4VER=2021.1
 export P4USER=mt952679
 export P4CLIENT=mt952679
