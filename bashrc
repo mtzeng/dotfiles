@@ -121,7 +121,7 @@ chbuild () {
 }
 
 sendfile() {
-  tar -cf - -C `dirname ${1}` `basename ${1}` | pv -s `du -b ${1} | cut -f 1` | nc -vv `echo $SSH_CONNECTION | cut -f 1 -d ' '` 8888
+  tar -cf - -C `dirname ${1}` `basename ${1}` | pv -s `du -b ${1} | cut -f 1` | nc -vv `w --no-header --ip-addr ${LOGNAME} | awk '{print $3}'` 8888
 }
 
 recvfile() {
