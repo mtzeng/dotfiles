@@ -5,6 +5,9 @@
 -- LazyVim auto format                                                              
 vim.g.autoformat = false
 
+-- disable all animations
+vim.g.snacks_animate = false
+
 local opt = vim.opt
 
 opt.colorcolumn = "80"
