@@ -8,10 +8,6 @@ return {
   { "williamboman/mason.nvim", enabled = false },
 
   -- coding.lua
-  -- auto completion
-  -- { "hrsh7th/nvim-cmp", enabled = false },
-  -- snippets
-  -- { "nvim-cmp", enabled = false },
   -- auto pairs
   { "echasnovski/mini.pairs", enabled = false },
   -- comments
@@ -60,15 +56,12 @@ return {
   { "akinsho/bufferline.nvim", enabled = false },
   -- statusline
   -- { "nvim-lualine/lualine.nvim", enabled = false },
-  -- indent guides for Neovim
-  { "lukas-reineke/indent-blankline.nvim", enabled = false },
   -- Highly experimental plugin that completely replaces the UI
   { "folke/noice.nvim", enabled = false },
   -- icons
   { "echasnovski/mini.icons", enabled = false },
   -- ui components
   -- { "MunifTanjim/nui.nvim", enabled = false },
-  -- { "folke/snacks.nvim", enabled = false },
 
   -- util.lua
   -- Session management.
