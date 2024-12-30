@@ -10,6 +10,7 @@ return {
     },
   },
   -- telescope
+  --[[
   {
     "telescope.nvim",
     dependencies = {
@@ -35,6 +36,7 @@ return {
       },
     },
   },
+  ]]
   -- vim-signify
   {
     "mhinz/vim-signify",
