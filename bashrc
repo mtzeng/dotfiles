@@ -158,18 +158,30 @@ export HISTCONTROL=ignorespace:erasedups
 export SSH_ASKPASS=
 
 if [[ "${OSTYPE}" == "darwin"* ]]; then
+  OSid2=${OSTYPE}
+else
+  if [[ -z "${OSTYPE}" ]]; then
+    # build server: /tools/bin/common.profile
+    OSid2=`/tools/bin/OSid | /usr/bin/cut -d- -f 2`
+  fi
+fi
+
+case "$OSid2" in
+"darwin"*)
   # Hide shell deprecated warning on macos after catalina
   # https://scriptingosx.com/2019/06/moving-to-zsh/
   export BASH_SILENCE_DEPRECATION_WARNING=1
-fi
+  ;;
 
-if [[ "${OSid2}" == "centos6" ]]; then
+"centos6")
   export VIMVER=8.2-p1
   export LLVMVER=11.0.0
 
   ### for github TLSv1.2 support
   updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/firefox/default/lib
-elif [[ "${OSid2}" == "centos7" ]]; then
+  ;;
+
+"centos7")
   export VIMVER=9.0.0814
   export LLVMVER=16.0.6
 
@@ -177,9 +189,13 @@ elif [[ "${OSid2}" == "centos7" ]]; then
   #updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
   #export CMAKEVER=3.20.2
   #export BINUTILSVER=2.30
-elif [[ "${OSid2}" == "centos8" ]]; then
+  ;;
+
+*)
   echo "${OSid2}" not supported
-fi
+  ;;
+
+esac
 
 # iTerm2 directory color is too dark
 # https://github.com/sorin-ionescu/prezto/issues/1539
@@ -210,10 +226,10 @@ fi
 if command -v tmux >/dev/null 2>&1; then
   alias tmux='tmux -2 -u'
 fi
-if [[ "${OSid2}" == "centos6" ]]; then
-alias vi='vim -X'
-else
+if command -v nvim >/dev/null 2>&1; then
 alias vi='nvim'
+else
+alias vi='vim -X'
 fi
 alias bd=". bd -si"
 
