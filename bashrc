@@ -160,13 +160,13 @@ export SSH_ASKPASS=
 if [[ "${OSTYPE}" == "darwin"* ]]; then
   OSid2=${OSTYPE}
 else
-  if [[ -z "${OSTYPE}" ]]; then
+  if [[ -z "${OSid2}" ]]; then
     # build server: /tools/bin/common.profile
     OSid2=`/tools/bin/OSid | /usr/bin/cut -d- -f 2`
   fi
 fi
 
-case "$OSid2" in
+case "${OSid2}" in
 "darwin"*)
   # Hide shell deprecated warning on macos after catalina
   # https://scriptingosx.com/2019/06/moving-to-zsh/
@@ -192,7 +192,7 @@ case "$OSid2" in
   ;;
 
 *)
-  echo "${OSid2}" not supported
+  echo OS "${OSid2}" not supported
   ;;
 
 esac
