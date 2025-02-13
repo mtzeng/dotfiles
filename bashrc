@@ -142,8 +142,6 @@ chbuild devel
 ### local bin
 updpath PATH $HOME/bin
 
-SUBVERSIONVER=1.9.2; export SUBVERSIONVER
-
 export P4PORT=ssl:pf-bca-3240-mas.devops.broadcom.net:3240
 export P4VER=2021.1
 export P4USER=mt952679
@@ -174,6 +172,8 @@ case "${OSid2}" in
   ;;
 
 "centos6")
+  export SUBVERSIONVER=1.9.2
+
   export VIMVER=8.2-p1
   export LLVMVER=11.0.0
 
@@ -182,6 +182,8 @@ case "${OSid2}" in
   ;;
 
 "centos7")
+  export SUBVERSIONVER=1.9.2
+
   export VIMVER=9.0.0814
   export LLVMVER=16.0.6
 
@@ -189,6 +191,9 @@ case "${OSid2}" in
   #updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib:/tools/oss/packages/x86_64-rhel6/gcc/${GCCVER}/lib64
   #export CMAKEVER=3.20.2
   #export BINUTILSVER=2.30
+  ;;
+
+"rhel8")
   ;;
 
 *)
