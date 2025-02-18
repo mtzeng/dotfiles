@@ -23,8 +23,6 @@ return {
   { "catppuccin/nvim", enabled = false },
 
   -- editor.lua
-  -- file explorer
-  -- { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   -- search/replace in multiple files
   { "MagicDuck/grug-far.nvim", enabled = false },
   -- Flash
