@@ -143,7 +143,7 @@ chbuild devel
 updpath PATH $HOME/bin
 
 export P4PORT=ssl:pf-bca-3240-mas.devops.broadcom.net:3240
-export P4VER=2021.1
+export P4VER=2023.1
 export P4USER=mt952679
 export P4CLIENT=mt952679
 export P4EDITOR=vi
