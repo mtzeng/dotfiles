@@ -62,7 +62,8 @@ updpath() {
 
 chbuild () {
 
-  toolchain_libs=/projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
+  toolchain_libs=/projects/bca/tools/linux/BCG/crosstools-arm-gcc-13.2-linux-5.15-glibc-2.38-binutils-2.41/lib
+  toolchain_libs=$toolchain_libs:/projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
   toolchain_libs=$toolchain_libs:/projects/bca/tools/linux/BCG/crosstools-arm-gcc-5.5-linux-4.1-glibc-2.26-binutils-2.28.1/usr/lib
   toolchain_libs=$toolchain_libs:/projects/hnd/tools/linux/BCG/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/lib
   toolchain_libs=$toolchain_libs:/projects/bca/tools/linux/hndtools-arm-linux-2.6.36-uclibc-4.5.3/lib
@@ -71,7 +72,14 @@ chbuild () {
     "" )
       echo $BUILD_PLATFORM
       ;;
-    "504L0x" | "devel")
+    "602L0x" | "devel")
+      updpath LD_LIBRARY_PATH $toolchain_libs remove
+      updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-13.2-linux-5.15-glibc-2.38-binutils-2.41/lib
+      updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
+      TOOLCHAIN_BASE=/projects/bca/tools/linux/BCG; export TOOLCHAIN_BASE
+      BUILD_PLATFORM=${1}; export BUILD_PLATFORM
+      ;;
+    "504L0x")
       updpath LD_LIBRARY_PATH $toolchain_libs remove
       updpath LD_LIBRARY_PATH /projects/bca/tools/linux/BCG/crosstools-arm-gcc-9.2-linux-4.19-glibc-2.30-binutils-2.32/usr/lib
       updpath PATH /projects/bca/tools/linux/hndtools-armeabi-2013.11/bin
@@ -110,8 +118,9 @@ chbuild () {
       BUILD_PLATFORM=${1}; export BUILD_PLATFORM
       ;;
     *)
-      echo "chbuild [ 504L0x | 502L0x | 502L0x_cache | 502L0x_old | 470x ]"
-      echo "  504L0x - 504L01/L02/devel"
+      echo "chbuild [ 602L0x | 504L0x | 502L0x | 502L0x_cache | 502L0x_old | 470x ]"
+      echo "  602L0x - 602L0x/devel"
+      echo "  504L0x - 504L01/L02"
       echo "  502L0x - 502L05/L07/L07p1"
       echo "  502L0x_cache - 502L0x ccache build"
       echo "  502L0x_old - 502L04"
@@ -194,6 +203,8 @@ case "${OSid2}" in
   ;;
 
 "rhel8")
+  export BISONVER=3.0.4
+  export CMAKEVER=3.28.0
   ;;
 
 *)
