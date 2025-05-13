@@ -5,7 +5,8 @@ return {
   -- lspconfig
   -- { "neovim/nvim-lspconfig", enabled = false },
   -- cmdline tools and lsp servers
-  { "williamboman/mason.nvim", enabled = false },
+  { "mason-org/mason.nvim", enabled = false },
+  { "mason-org/mason-lspconfig.nvim", enabled = false },
 
   -- coding.lua
   -- auto pairs
