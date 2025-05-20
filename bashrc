@@ -253,6 +253,7 @@ alias bd=". bd -si"
 GDB_PATH=$HOME/bin/gdb_python
 #updpath LD_LIBRARY_PATH /tools/oss/packages/x86_64-${OSid2}/python/2.7.5/lib append
 alias gdb_dbg="$GDB_PATH/gdb-python --data-directory=$GDB_PATH/data-directory"
+alias socram_analyzer_bca.py="~/bin/gdb_scripts/socram_analyzer_bca.py -g -s -c"
 
 # Enable X11 forwarding
 alias ssh='ssh -X'
