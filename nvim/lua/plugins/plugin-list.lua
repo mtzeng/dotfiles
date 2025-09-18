@@ -4,17 +4,15 @@ return {
   -- lsp/init.lua
   -- lspconfig
   -- { "neovim/nvim-lspconfig", enabled = false },
-  -- cmdline tools and lsp servers
-  { "mason-org/mason.nvim", enabled = false },
-  { "mason-org/mason-lspconfig.nvim", enabled = false },
 
   -- coding.lua
-  -- auto pairs
-  { "echasnovski/mini.pairs", enabled = false },
-  -- comments
+  -- Auto pairs
+  { "nvim-mini/mini.pairs", enabled = false },
+  -- Improves comment syntax
   { "folke/ts-comments.nvim", enabled = false },
-  -- Better text-objects
-  { "echasnovski/mini.ai", enabled = false },
+  -- Extends the a & i text objects
+  { "nvim-mini/mini.ai", enabled = false },
+  -- Configures LuaLS to support auto-completion and type checking
   -- { "folke/lazydev.nvim", eanbled = false },
 
   -- colorscheme.lua
@@ -58,7 +56,7 @@ return {
   -- Highly experimental plugin that completely replaces the UI
   { "folke/noice.nvim", enabled = false },
   -- icons
-  { "echasnovski/mini.icons", enabled = false },
+  { "nvim-mini/mini.icons", enabled = false },
   -- ui components
   -- { "MunifTanjim/nui.nvim", enabled = false },
 
