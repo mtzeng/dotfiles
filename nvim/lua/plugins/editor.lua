@@ -9,34 +9,6 @@ return {
       },
     },
   },
-  -- telescope
-  --[[
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-    },
-    opts = {
-      defaults = {
-        prompt_prefix = ">> ",
-        selection_caret = "> ",
-        -- https://www.reddit.com/r/neovim/comments/pzxw8h/telescope_quit_on_first_single_esc/
-        mappings = {
-          i = {
-            ["<esc>"] = require("telescope.actions").close,
-            ['<C-y>'] = require('telescope.actions.layout').toggle_preview
-          },
-        },
-        sorting_strategy = "ascending",
-        layout_strategy = "bottom_pane",
-      },
-    },
-  },
-  ]]
   -- vim-signify
   {
     "mhinz/vim-signify",
